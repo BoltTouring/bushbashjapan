@@ -1,0 +1,15 @@
+{
+  "title": "Home Page",
+  "slug": "home",
+  "type": "page",
+  "sections": [
+    {
+      "type": "hero",
+      "heading": "Welcome to My Website!",
+      "subheading": "This is a test hero section.",
+      "ctaText": "Learn More",
+      "ctaLink": "/about"
+    }
+  ]
+}
+

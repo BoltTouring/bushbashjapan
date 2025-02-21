@@ -12,20 +12,32 @@ export default async function ComposablePage() {
   try {
     const page = await getPageFromSlug("/");
 
+    // 🔹 Debugging Log
+    console.log("Loaded page data:", page);
+
     if (!page) {
-      return notFound();
+      console.error("Page data is null or undefined.");
+      return <div>Page not found</div>;
     }
 
     return (
       <div data-sb-object-id={page.id}>
-        {(page.sections || []).map((section, idx) => {
-          const Component = componentMap[section.type];
-          return <Component key={idx} {...section} />;
-        })}
+        {/* 🔹 Add a heading for visibility */}
+        <h1>{page.title || "Untitled Page"}</h1>
+        
+        {/* 🔹 Check if sections exist before mapping */}
+        {Array.isArray(page.sections) && page.sections.length > 0 ? (
+          page.sections.map((section, idx) => {
+            const Component = componentMap[section.type];
+            return Component ? <Component key={idx} {...section} /> : null;
+          })
+        ) : (
+          <p>No sections to display</p>
+        )}
       </div>
     );
   } catch (error) {
-    console.error(error.message);
-    return notFound();
+    console.error("Error in ComposablePage:", error.message);
+    return <div>Something went wrong.</div>;
   }
 }
