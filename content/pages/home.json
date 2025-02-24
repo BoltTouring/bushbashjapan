@@ -5,30 +5,66 @@
   "sections": [
     {
       "type": "hero",
-      "image": "/images/bbhero.jpg",
+      "image": "/images/bushbash-hero.jpg",
       "heading": "Bush Bash Japan",
-      "subheading": "12-13 April 2025"
+      "subheading": "12 - 13 April 2025"
     },
     {
       "type": "text",
-      "heading": "Why We're Doing This",
-      "content": "Bush Bash Japan is an adventure-filled event designed to bring together outdoor enthusiasts for an unforgettable experience. Our goal is to create a fun and engaging journey while celebrating nature and community."
+      "heading": "A Weekend for Bitcoiners in the Countryside of Japan",
+      "content": "Join us for the inaugural Bush Bash Japan, inspired by Bush Bash Australia. This informal weekend brings Bitcoiners together in the Japanese countryside—no event cost, no KYC, just great discussions and experiences. As more participants confirm their attendance, the schedule and activities will be updated."
     },
     {
       "type": "schedule",
-      "heading": "Event Schedule",
+      "heading": "<u><b>Friday, April 11th - Informal Meet & Greet</b></u>",
+      "align": "left",
       "items": [
-        { "time": "8:00 AM", "activity": "Check-in & Welcome" },
-        { "time": "9:00 AM", "activity": "Hiking & Exploration" },
-        { "time": "12:00 PM", "activity": "Lunch & Networking" },
-        { "time": "2:00 PM", "activity": "Workshops & Activities" },
-        { "time": "5:00 PM", "activity": "Closing Ceremony" }
+        { "time": "Evening", "activity": "Arrivals & informal gathering" }
       ]
+    },
+    {
+      "type": "schedule",
+      "heading": "<u><b>Saturday, April 12th - Main Event Day</b></u>",
+      "align": "left",
+      "items": [
+        { "time": "9:00 AM - 10:00 AM", "activity": "Check-in & Coffee" },
+        { "time": "10:00 AM - 12:00 PM", "activity": "Introduction & Presentations" },
+        { "time": "12:00 PM - 2:00 PM", "activity": "Lunch & Free Time" },
+        { "time": "2:00 PM - 5:00 PM", "activity": "Presentations & Discussions" },
+        { "time": "5:00 PM - Late", "activity": "Sauna, Bonfire, Dinner, Drinks, and More" }
+      ]
+    },
+    {
+      "type": "schedule",
+      "heading": "<u><b>Sunday, April 13th - To Be Determined</b></u>",
+      "align": "left",
+      "items": [
+        { "time": "TBD", "activity": "Activities and discussions based on attendee interest" }
+      ]
+    },
+    {
+      "type": "text",
+      "heading": "📍 Location",
+      "content": "Bush Bash Japan will take place at <b>Lodge Kiyokawa</b> in <b>Bungo-Ōno, Oita, Japan</b>. The lodge is surrounded by stunning nature, offering a great setting for outdoor discussions and relaxation."
+    },
+    {
+      "type": "text",
+      "heading": "🏡 Accommodations",
+      "content": "Attendees can stay at <b>Lodge Kiyokawa</b>, which offers both private and shared rooms. Additional nearby lodging options will be provided as needed. Please <b>book early</b> to secure your spot!"
+    },
+    {
+      "type": "text",
+      "heading": "🛏️ Current Availability",
+      "content": "The following options are available accommodations:<br><b>6 Tree Houses</b> (each for 2 people)<br><b>16 Dormitory Spots</b> (8 male, 8 female). If you’d like to make a reservation, please use the contact form below."
+    },
+    {
+      "type": "text",
+      "heading": "🍽️ Food Availability",
+      "content": "Food will be available for purchase at Lodge Kiyokawa. There are also a few nearby restaurants and a Michi no Eki."
     },
     {
       "type": "contact-form"
     }
   ]
 }
-
 
