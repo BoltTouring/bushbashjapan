@@ -1,15 +1,34 @@
 {
-  "title": "Home Page",
+  "title": "Bush Bash Japan",
   "slug": "home",
   "type": "page",
   "sections": [
     {
       "type": "hero",
-      "heading": "Welcome to My Website!",
-      "subheading": "This is a test hero section.",
-      "ctaText": "Learn More",
-      "ctaLink": "/about"
+      "image": "/images/bbhero.jpg",
+      "heading": "Bush Bash Japan",
+      "subheading": "12-13 April 2025"
+    },
+    {
+      "type": "text",
+      "heading": "Why We're Doing This",
+      "content": "Bush Bash Japan is an adventure-filled event designed to bring together outdoor enthusiasts for an unforgettable experience. Our goal is to create a fun and engaging journey while celebrating nature and community."
+    },
+    {
+      "type": "schedule",
+      "heading": "Event Schedule",
+      "items": [
+        { "time": "8:00 AM", "activity": "Check-in & Welcome" },
+        { "time": "9:00 AM", "activity": "Hiking & Exploration" },
+        { "time": "12:00 PM", "activity": "Lunch & Networking" },
+        { "time": "2:00 PM", "activity": "Workshops & Activities" },
+        { "time": "5:00 PM", "activity": "Closing Ceremony" }
+      ]
+    },
+    {
+      "type": "contact-form"
     }
   ]
 }
+
 

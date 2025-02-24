@@ -22,8 +22,6 @@ export default async function ComposablePage() {
 
     return (
       <div data-sb-object-id={page.id}>
-        {/* 🔹 Add a heading for visibility */}
-        <h1>{page.title || "Untitled Page"}</h1>
         
         {/* 🔹 Check if sections exist before mapping */}
         {Array.isArray(page.sections) && page.sections.length > 0 ? (

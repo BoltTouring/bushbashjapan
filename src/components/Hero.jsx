@@ -1,40 +1,61 @@
-import Markdown from 'markdown-to-jsx';
-import Image from 'next/image';
-import { Button } from './Button.jsx';
-
-const themeClassMap = {
-  imgLeft: 'md:flex-row-reverse',
-  imgRight: 'md:flex-row',
-};
-
-export const Hero = (props) => {
+export function Hero({ image, heading, subheading }) {
   return (
-    <div className="px-6 py-16 bg-gray-100 sm:px-12 sm:py-24" data-sb-object-id={props.id}>
-      <div className={`max-w-6xl mx-auto flex flex-col gap-12 md:items-center ${themeClassMap[props.theme] ?? themeClassMap['imgRight']}`}>
-        <div className="flex-1 w-full max-w-xl mx-auto">
-          <h1 className="mb-6 text-4xl font-bold sm:text-5xl" data-sb-field-path="heading">
-            {props.heading}
-          </h1>
-          {props.body && (
-            <Markdown options={{ forceBlock: true }} className="mb-6 text-lg" data-sb-field-path="body">
-              {props.body}
-            </Markdown>
-          )}
-          {props.button && <Button {...props.button} />}
-        </div>
-        <div className="relative flex-1 w-full overflow-hidden rounded-md aspect-4/3">
-          {props.image && (
-            <Image
-              src={props.image.src}
-              alt={props.image.alt}
-              fill
-              className='object-cover'
-              sizes="(max-width: 767px) 100vw, (max-width: 1200px) 50vw, 600px"
-              data-sb-field-path="image"
-            />
-          )}
-        </div>
+    <section style={{ 
+      position: 'relative',
+      width: '100%',
+      height: 'calc(100vh - 80px)',
+      overflow: 'hidden'
+    }}>
+      {/* Background Image */}
+      <img 
+        src={image} 
+        alt="Hero Background" 
+        style={{
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          position: 'absolute',
+          top: 0,
+          left: 0
+        }}
+      />
+      
+      {/* Overlay for readability */}
+      <div style={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)'
+      }}></div>
+
+      {/* Text Content */}
+      <div style={{
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        color: 'white',
+        textAlign: 'center'
+      }}>
+        <h1 style={{
+          fontSize: '5rem',  // Increased size from 4rem to 5rem
+          fontWeight: 'bold',
+          textShadow: '3px 3px 6px rgba(0,0,0,0.7)',
+          marginBottom: '15px' // Added more space below
+        }}>
+          {heading}
+        </h1>
+        <h2 style={{
+          fontSize: '1.8rem',  // Adjusted from 2rem to 1.8rem for better balance
+          fontWeight: 'normal',
+          textShadow: '1px 1px 3px rgba(0,0,0,0.5)'
+        }}>
+          {subheading}
+        </h2>
       </div>
-    </div>
+    </section>
   );
-};
+}
+
