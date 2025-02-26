@@ -16,6 +16,7 @@
             border-radius: 12px;
             padding: 24px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 16px;
         }
         .hero {
             height: 85vh;
@@ -68,7 +69,6 @@
     </style>
 </head>
 <body>
-
     <!-- Hero Section -->
     <div class="hero">
         <div class="hero-content">
@@ -78,9 +78,35 @@
     </div>
 
     <div class="max-w-4xl md:max-w-2xl mx-auto py-12 px-4">
+        <!-- Event Schedule -->
+        <section class="section-card">
+            <h2 class="text-2xl font-semibold">📅 Event Schedule</h2>
+            <p><b>Friday, April 11:</b> Informal Meet & Greet</p>
+            <p><b>Saturday, April 12:</b> Talks, Presentations, and Social</p>
+            <p><b>Sunday, April 13:</b> TBD</p>
+        </section>
+        
+        <!-- Current Availability -->
+        <section class="section-card">
+            <h2 class="text-2xl font-semibold">🛏️ Current Availability</h2>
+            <p><b>6 Tree Houses</b> (each for 2 people)</p>
+            <p><b>16 Dormitory Spots</b> (8 male, 8 female)</p>
+        </section>
+        
+        <!-- Location -->
+        <section class="section-card">
+            <h2 class="text-2xl font-semibold">📍 Location</h2>
+            <p>Bush Bash Japan will take place at <b>Lodge Kiyokawa</b> in <b>Bungo-Ōno, Oita, Japan</b>.</p>
+        </section>
+        
+        <!-- Food Availability -->
+        <section class="section-card">
+            <h2 class="text-2xl font-semibold">🍽️ Food Availability</h2>
+            <p>Food will be available for purchase at Lodge Kiyokawa.</p>
+        </section>
 
         <!-- Contact Form (Netlify Forms) -->
-        <section class="section-card mt-8">
+        <section class="section-card">
             <h2 class="text-2xl font-semibold">Reserve Your Spot / Contact Us</h2>
             <form name="contact" method="POST" data-netlify="true" class="mt-4">
                 <input type="hidden" name="form-name" value="contact">
@@ -91,7 +117,6 @@
             </form>
         </section>
     </div>
-
 </body>
 </html>
 
