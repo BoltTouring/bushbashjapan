@@ -6,13 +6,16 @@
     <title>Bush Bash Japan</title>
     <link rel="icon" href="/bbjapan/public/favicon.ico" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+JP:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         body {
             background: linear-gradient(to bottom, #f9fafb, #e5e7eb);
             font-family: 'Inter', sans-serif;
             color: #1f2937;
             line-height: 1.6;
+        }
+        .jp {
+            font-family: 'Noto Sans JP', sans-serif;
         }
         .nav-bar {
             position: sticky;
@@ -113,6 +116,15 @@
             padding: 20px 0;
             text-align: center;
         }
+        .lang-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 20;
+        }
+        .hidden {
+            display: none;
+        }
         @media (max-width: 768px) {
             .hero {
                 height: 50vh;
@@ -130,120 +142,249 @@
             .nav-bar {
                 padding: 10px 0;
             }
+            .lang-toggle {
+                top: 10px;
+                right: 10px;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation Bar -->
-    <nav class="nav-bar py-4 px-6">
-        <div class="max-w-4xl mx-auto flex justify-between items-center">
-            <h1 class="text-xl font-bold text-gray-800">Bush Bash Japan</h1>
-            <div class="space-x-6">
-                <a href="#intro" class="text-gray-600 hover:text-orange-600">Intro</a>
-                <a href="#schedule" class="text-gray-600 hover:text-orange-600">Schedule</a>
-                <a href="#availability" class="text-gray-600 hover:text-orange-600">Availability</a>
-                <a href="#location" class="text-gray-600 hover:text-orange-600">Location</a>
-                <a href="#contact" class="text-gray-600 hover:text-orange-600">Contact</a>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Hero Section with CTA and Countdown -->
-    <div class="hero">
-        <div class="hero-content">
-            <h1 class="text-6xl md:text-4xl font-bold">Bush Bash Japan</h1>
-            <p class="text-2xl md:text-lg mt-3">12 - 13 April 2025</p>
-            <div id="countdown" class="countdown"></div>
-            <a href="#contact" class="cta-button mt-6 inline-block">Reserve Now</a>
-        </div>
+    <!-- Language Toggle -->
+    <div class="lang-toggle">
+        <button id="toggle-en" class="text-gray-600 hover:text-orange-600 mr-4">English</button>
+        <button id="toggle-jp" class="text-gray-600 hover:text-orange-600">日本語</button>
     </div>
 
-    <div class="max-w-4xl mx-auto py-16 px-6">
-        <!-- Intro Section -->
-        <section id="intro" class="section-card intro-card">
-            <h2 class="text-3xl font-semibold mb-4">Bush Bash Japan 🇯🇵</h2>
-            <p>Join us for the inaugural Bush Bash Japan, inspired by Bush Bash Australia. This informal weekend brings Bitcoiners together in the Japanese countryside—no event cost, no KYC, just great discussions and experiences. As more participants confirm their attendance, the schedule and activities will be updated.</p>
-        </section>
-
-        <!-- Event Schedule -->
-        <section id="schedule" class="section-card">
-            <h2 class="text-3xl font-semibold mb-4">📅 Event Schedule</h2>
-            <div class="space-y-4">
-                <div class="schedule-day">
-                    <p><span class="font-bold">Friday, April 11:</span> Informal Meet & Greet (Evening)</p>
-                </div>
-                <div class="schedule-day">
-                    <p><span class="font-bold">Saturday, April 12:</span> Main Event Day</p>
-                    <ul class="ml-6 list-disc space-y-1">
-                        <li><span class="font-bold">9:00 AM - 10:00 AM:</span> Check-in & Coffee</li>
-                        <li><span class="font-bold">10:00 AM - 12:00 PM:</span> Introduction & Presentations</li>
-                        <li><span class="font-bold">12:00 PM - 2:00 PM:</span> Lunch & Free Time</li>
-                        <li><span class="font-bold">2:00 PM - 5:00 PM:</span> Presentations & Discussions</li>
-                        <li><span class="font-bold">5:00 PM - Late:</span> Sauna, Bonfire, Dinner, Drinks, and More</li>
-                    </ul>
-                </div>
-                <div class="schedule-day">
-                    <p><span class="font-bold">Sunday, April 13:</span> TBD</p>
+    <!-- English Content -->
+    <div id="content-en">
+        <!-- Navigation Bar -->
+        <nav class="nav-bar py-4 px-6">
+            <div class="max-w-4xl mx-auto flex justify-between items-center">
+                <h1 class="text-xl font-bold text-gray-800">Bush Bash Japan</h1>
+                <div class="space-x-6">
+                    <a href="#intro" class="text-gray-600 hover:text-orange-600">Intro</a>
+                    <a href="#schedule" class="text-gray-600 hover:text-orange-600">Schedule</a>
+                    <a href="#availability" class="text-gray-600 hover:text-orange-600">Availability</a>
+                    <a href="#location" class="text-gray-600 hover:text-orange-600">Location</a>
+                    <a href="#contact" class="text-gray-600 hover:text-orange-600">Contact</a>
                 </div>
             </div>
-        </section>
-        
-        <!-- Current Availability -->
-        <section id="availability" class="section-card">
-            <h2 class="text-3xl font-semibold mb-4">🛏️ Current Availability</h2>
-            <p>Availability for Saturday evening at Lodge Kiyokawa</p>
-            <div class="mt-4 border-t pt-4">
-                <p><span class="font-bold">6 Tree Houses</span> (up to 2 people each)</p>
-                <p><span class="font-bold">16 Dormitory Spots</span> (8 male, 8 female)</p>
-                <p class="text-sm text-gray-600">Note: Enquire about Friday or Sunday availability in the contact form below.</p>
-            </div>
-        </section>
-        
-        <!-- Location with Updated Map -->
-        <section id="location" class="section-card">
-            <h2 class="text-3xl font-semibold mb-4">📍 Location</h2>
-            <p>Bush Bash Japan will take place at <span class="font-bold">Lodge Kiyokawa</span> in <span class="font-bold">Bungo-Ōno, Oita, Japan</span>.</p>
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3355.996760732131!2d131.57039321520954!3d32.86736398101367!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3546b7e7c7e7c7e7%3A0x8e8f8c8e8f8c8e8f!2s158%20Kiyokawamachi%20Utaeda%2C%20Bungoono%2C%20Oita%20879-6911%2C%20Japan!5e0!3m2!1sen!2sjp!4v1677654321987!5m2!1sen!2sjp" width="100%" height="300" style="border:0; margin-top: 16px;" allowfullscreen loading="lazy"></iframe>
-        </section>
-        
-        <!-- Food Availability -->
-        <section class="section-card">
-            <h2 class="text-3xl font-semibold mb-4">🍽️ Food Availability</h2>
-            <p>Food will be available for purchase at Lodge Kiyokawa. There are also a few nearby restaurants and a Michi no Eki.</p>
-        </section>
+        </nav>
 
-        <!-- Contact Form (Netlify Forms) -->
-        <section id="contact" class="section-card">
-            <h2 class="text-3xl font-semibold mb-4">Reserve Your Spot / Contact Us</h2>
-            <form name="contact" method="POST" data-netlify="true" class="mt-6 space-y-4">
-                <input type="hidden" name="form-name" value="contact">
-                <input type="text" name="name" placeholder="Your Name / Nym" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent" required>
-                <input type="email" name="email" placeholder="Your Email" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent" required>
-                <textarea name="message" placeholder="Your Message (English or 日本語)" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent h-32"></textarea>
-                <button type="submit" class="submit-button">Send Message</button>
-            </form>
-        </section>
+        <!-- Hero Section -->
+        <div class="hero">
+            <div class="hero-content">
+                <h1 class="text-6xl md:text-4xl font-bold">Bush Bash Japan</h1>
+                <p class="text-2xl md:text-lg mt-3">12 - 13 April 2025</p>
+                <div id="countdown-en" class="countdown"></div>
+                <a href="#contact" class="cta-button mt-6 inline-block">Reserve Now</a>
+            </div>
+        </div>
+
+        <div class="max-w-4xl mx-auto py-16 px-6">
+            <!-- Intro Section -->
+            <section id="intro" class="section-card intro-card">
+                <h2 class="text-3xl font-semibold mb-4">Bush Bash Japan 🇯🇵</h2>
+                <p>Join us for the inaugural Bush Bash Japan, inspired by Bush Bash Australia. This informal weekend brings Bitcoiners together in the Japanese countryside—no event cost, no KYC, just great discussions and experiences. As more participants confirm their attendance, the schedule and activities will be updated.</p>
+            </section>
+
+            <!-- Event Schedule -->
+            <section id="schedule" class="section-card">
+                <h2 class="text-3xl font-semibold mb-4">📅 Event Schedule (Work in Progress)</h2>
+                <div class="space-y-4">
+                    <div class="schedule-day">
+                        <p><span class="font-bold">Friday, April 11:</span> Informal Meet & Greet (Evening)</p>
+                    </div>
+                    <div class="schedule-day">
+                        <p><span class="font-bold">Saturday, April 12:</span> Main Event Day</p>
+                        <ul class="ml-6 list-disc space-y-1">
+                            <li><span class="font-bold">9:00 AM - 10:00 AM:</span> Check-in & Coffee</li>
+                            <li><span class="font-bold">10:00 AM - 12:00 PM:</span> Introduction & Presentations</li>
+                            <li><span class="font-bold">12:00 PM - 2:00 PM:</span> Lunch & Free Time</li>
+                            <li><span class="font-bold">2:00 PM - 5:00 PM:</span> Presentations & Discussions</li>
+                            <li><span class="font-bold">5:00 PM - Late:</span> Sauna, Bonfire, Dinner, Drinks, and More</li>
+                        </ul>
+                    </div>
+                    <div class="schedule-day">
+                        <p><span class="font-bold">Sunday, April 13:</span> TBD</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Current Availability -->
+            <section id="availability" class="section-card">
+                <h2 class="text-3xl font-semibold mb-4">🛏️ Current Availability</h2>
+                <p>Availability for Saturday evening at Lodge Kiyokawa</p>
+                <div class="mt-4 border-t pt-4">
+                    <p><span class="font-bold">6 Tree Houses</span> (up to 2 people each)</p>
+                    <p><span class="font-bold">16 Dormitory Spots</span> (8 male, 8 female)</p>
+                    <p class="text-sm text-gray-600">Note: Enquire about Friday or Sunday availability in the contact form below.</p>
+                </div>
+            </section>
+            
+            <!-- Location -->
+            <section id="location" class="section-card">
+                <h2 class="text-3xl font-semibold mb-4">📍 Location</h2>
+                <p>Bush Bash Japan will take place at <span class="font-bold">Lodge Kiyokawa</span> in <span class="font-bold">Bungo-Ōno, Oita, Japan</span>.</p>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3355.996760732131!2d131.57039321520954!3d32.86736398101367!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3546b7e7c7e7c7e7%3A0x8e8f8c8e8f8c8e8f!2s158%20Kiyokawamachi%20Utaeda%2C%20Bungoono%2C%20Oita%20879-6911%2C%20Japan!5e0!3m2!1sen!2sjp!4v1677654321987!5m2!1sen!2sjp" width="100%" height="300" style="border:0; margin-top: 16px;" allowfullscreen loading="lazy"></iframe>
+            </section>
+            
+            <!-- Food Availability -->
+            <section class="section-card">
+                <h2 class="text-3xl font-semibold mb-4">🍽️ Food Availability</h2>
+                <p>Food will be available for purchase at Lodge Kiyokawa. There are also a few nearby restaurants and a Michi no Eki.</p>
+            </section>
+
+            <!-- Contact Form -->
+            <section id="contact" class="section-card">
+                <h2 class="text-3xl font-semibold mb-4">Reserve Your Spot / Contact Us</h2>
+                <form name="contact" method="POST" data-netlify="true" class="mt-6 space-y-4">
+                    <input type="hidden" name="form-name" value="contact">
+                    <input type="text" name="name" placeholder="Your Name / Nym" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent" required>
+                    <input type="email" name="email" placeholder="Your Email" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent" required>
+                    <textarea name="message" placeholder="Your Message (English or 日本語)" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent h-32"></textarea>
+                    <button type="submit" class="submit-button">Send Message</button>
+                </form>
+            </section>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p>© 2025 Bush Bash Japan. All rights reserved.</p>
+        </footer>
     </div>
 
-    <!-- Footer -->
-    <footer>
-        <p>© 2025 Bush Bash Japan. All rights reserved.</p>
-    </footer>
+    <!-- Japanese Content -->
+    <div id="content-jp" class="hidden jp">
+        <!-- Navigation Bar -->
+        <nav class="nav-bar py-4 px-6">
+            <div class="max-w-4xl mx-auto flex justify-between items-center">
+                <h1 class="text-xl font-bold text-gray-800">ブッシュバッシュジャパン</h1>
+                <div class="space-x-6">
+                    <a href="#intro" class="text-gray-600 hover:text-orange-600">イントロ</a>
+                    <a href="#schedule" class="text-gray-600 hover:text-orange-600">スケジュール</a>
+                    <a href="#availability" class="text-gray-600 hover:text-orange-600">空き状況</a>
+                    <a href="#location" class="text-gray-600 hover:text-orange-600">場所</a>
+                    <a href="#contact" class="text-gray-600 hover:text-orange-600">お問い合わせ</a>
+                </div>
+            </div>
+        </nav>
 
-    <!-- Countdown Timer Script (Days Only) -->
+        <!-- Hero Section -->
+        <div class="hero">
+            <div class="hero-content">
+                <h1 class="text-6xl md:text-4xl font-bold">ブッシュバッシュジャパン</h1>
+                <p class="text-2xl md:text-lg mt-3">2025年4月12日 - 13日</p>
+                <div id="countdown-jp" class="countdown"></div>
+                <a href="#contact" class="cta-button mt-6 inline-block">今すぐ予約</a>
+            </div>
+        </div>
+
+        <div class="max-w-4xl mx-auto py-16 px-6">
+            <!-- Intro Section -->
+            <section id="intro" class="section-card intro-card">
+                <h2 class="text-3xl font-semibold mb-4">ブッシュバッシュジャパン 🇯🇵</h2>
+                <p>ブッシュバッシュオーストラリアに触発された初のブッシュバッシュジャパンにご参加ください。この非公式な週末は、日本の田舎でビットコイナーたちを集めます—イベント費用なし、KYCなし、素晴らしい議論と体験だけです。参加者が確定するにつれて、スケジュールとアクティビティが更新されます。</p>
+            </section>
+
+            <!-- Event Schedule -->
+            <section id="schedule" class="section-card">
+                <h2 class="text-3xl font-semibold mb-4">📅 イベントスケジュール (進行中)</h2>
+                <div class="space-y-4">
+                    <div class="schedule-day">
+                        <p><span class="font-bold">4月11日(金):</span> インフォーマルなミート＆グリート (夕方)</p>
+                    </div>
+                    <div class="schedule-day">
+                        <p><span class="font-bold">4月12日(土):</span> メインイベント日</p>
+                        <ul class="ml-6 list-disc space-y-1">
+                            <li><span class="font-bold">午前9:00 - 10:00:</span> チェックイン＆コーヒー</li>
+                            <li><span class="font-bold">午前10:00 - 正午:</span> 紹介＆プレゼンテーション</li>
+                            <li><span class="font-bold">正午 - 午後2:00:</span> ランチ＆自由時間</li>
+                            <li><span class="font-bold">午後2:00 - 5:00:</span> プレゼンテーション＆ディスカッション</li>
+                            <li><span class="font-bold">午後5:00 - 深夜:</span> サウナ、焚き火、ディナー、ドリンクなど</li>
+                        </ul>
+                    </div>
+                    <div class="schedule-day">
+                        <p><span class="font-bold">4月13日(日):</span> 未定</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Current Availability -->
+            <section id="availability" class="section-card">
+                <h2 class="text-3xl font-semibold mb-4">🛏️ 現在の空き状況</h2>
+                <p>ロッジ清川での土曜日の夜の空き状況</p>
+                <div class="mt-4 border-t pt-4">
+                    <p><span class="font-bold">6つのツリーハウス</span> (各最大2名)</p>
+                    <p><span class="font-bold">16のドミトリースポット</span> (男性8名、女性8名)</p>
+                    <p class="text-sm text-gray-600">注: 金曜日または日曜日の空き状況については、以下の連絡フォームでお問い合わせください。</p>
+                </div>
+            </section>
+            
+            <!-- Location -->
+            <section id="location" class="section-card">
+                <h2 class="text-3xl font-semibold mb-4">📍 場所</h2>
+                <p>ブッシュバッシュジャパンは、大分県豊後大野市の<span class="font-bold">ロッジ清川</span>で開催されます。</p>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3355.996760732131!2d131.57039321520954!3d32.86736398101367!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3546b7e7c7e7c7e7%3A0x8e8f8c8e8f8c8e8f!2s158%20Kiyokawamachi%20Utaeda%2C%20Bungoono%2C%20Oita%20879-6911%2C%20Japan!5e0!3m2!1sen!2sjp!4v1677654321987!5m2!1sen!2sjp" width="100%" height="300" style="border:0; margin-top: 16px;" allowfullscreen loading="lazy"></iframe>
+            </section>
+            
+            <!-- Food Availability -->
+            <section class="section-card">
+                <h2 class="text-3xl font-semibold mb-4">🍽️ 食事の提供</h2>
+                <p>ロッジ清川で食事が購入可能です。近くにはいくつかのレストランや道の駅もあります。</p>
+            </section>
+
+            <!-- Contact Form -->
+            <section id="contact" class="section-card">
+                <h2 class="text-3xl font-semibold mb-4">予約 / お問い合わせ</h2>
+                <form name="contact" method="POST" data-netlify="true" class="mt-6 space-y-4">
+                    <input type="hidden" name="form-name" value="contact">
+                    <input type="text" name="name" placeholder="お名前 / ニックネーム" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent" required>
+                    <input type="email" name="email" placeholder="メールアドレス" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent" required>
+                    <textarea name="message" placeholder="メッセージ (English or 日本語)" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent h-32"></textarea>
+                    <button type="submit" class="submit-button">メッセージを送信</button>
+                </form>
+            </section>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p>© 2025 ブッシュバッシュジャパン。全権利予約。</p>
+        </footer>
+    </div>
+
+    <!-- JavaScript for Language Toggle and Countdown -->
     <script>
+        const contentEn = document.getElementById("content-en");
+        const contentJp = document.getElementById("content-jp");
+        const toggleEn = document.getElementById("toggle-en");
+        const toggleJp = document.getElementById("toggle-jp");
+
+        toggleEn.addEventListener("click", () => {
+            contentEn.classList.remove("hidden");
+            contentJp.classList.add("hidden");
+        });
+
+        toggleJp.addEventListener("click", () => {
+            contentEn.classList.add("hidden");
+            contentJp.classList.remove("hidden");
+        });
+
         function updateCountdown() {
             const eventDate = new Date("2025-04-12T00:00:00+09:00"); // JST
             const now = new Date();
             const timeLeft = eventDate - now;
 
             if (timeLeft < 0) {
-                document.getElementById("countdown").innerHTML = "Bush Bash Japan has begun!";
+                document.getElementById("countdown-en").innerHTML = "Bush Bash Japan has begun!";
+                document.getElementById("countdown-jp").innerHTML = "ブッシュバッシュジャパンが始まりました！";
                 return;
             }
 
             const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-            document.getElementById("countdown").innerHTML = `${days} days until Bush Bash Japan`;
+            document.getElementById("countdown-en").innerHTML = `${days} days until Bush Bash Japan`;
+            document.getElementById("countdown-jp").innerHTML = `ブッシュバッシュジャパンまで${days}日`;
         }
 
         setInterval(updateCountdown, 1000);
