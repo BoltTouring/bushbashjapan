@@ -116,14 +116,11 @@
             padding: 20px 0;
             text-align: center;
         }
-        .lang-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 20;
-        }
-        .hidden {
+        .hamburger {
             display: none;
+        }
+        .nav-menu {
+            transition: all 0.3s ease-in-out;
         }
         @media (max-width: 768px) {
             .hero {
@@ -142,32 +139,47 @@
             .nav-bar {
                 padding: 10px 0;
             }
-            .lang-toggle {
-                top: 10px;
-                right: 10px;
+            .hamburger {
+                display: block;
+                cursor: pointer;
+                font-size: 1.5rem;
+            }
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(255, 255, 255, 0.95);
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            }
+            .nav-menu.active {
+                display: flex;
+            }
+            .nav-menu a, .nav-menu button {
+                margin: 0.5rem 0;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Language Toggle -->
-    <div class="lang-toggle">
-        <button id="toggle-en" class="text-gray-600 hover:text-orange-600 mr-4">English</button>
-        <button id="toggle-jp" class="text-gray-600 hover:text-orange-600">日本語</button>
-    </div>
-
     <!-- English Content -->
     <div id="content-en">
         <!-- Navigation Bar -->
         <nav class="nav-bar py-4 px-6">
             <div class="max-w-4xl mx-auto flex justify-between items-center">
                 <h1 class="text-xl font-bold text-gray-800">Bush Bash Japan</h1>
-                <div class="space-x-6">
+                <div class="hamburger md:hidden">☰</div>
+                <div class="nav-menu md:flex md:space-x-6 items-center">
                     <a href="#intro" class="text-gray-600 hover:text-orange-600">Intro</a>
                     <a href="#schedule" class="text-gray-600 hover:text-orange-600">Schedule</a>
                     <a href="#availability" class="text-gray-600 hover:text-orange-600">Availability</a>
                     <a href="#location" class="text-gray-600 hover:text-orange-600">Location</a>
                     <a href="#contact" class="text-gray-600 hover:text-orange-600">Contact</a>
+                    <button id="toggle-en" class="text-gray-600 hover:text-orange-600 hidden md:inline">English</button>
+                    <button id="toggle-jp" class="text-gray-600 hover:text-orange-600">日本語</button>
                 </div>
             </div>
         </nav>
@@ -261,12 +273,15 @@
         <nav class="nav-bar py-4 px-6">
             <div class="max-w-4xl mx-auto flex justify-between items-center">
                 <h1 class="text-xl font-bold text-gray-800">ブッシュバッシュジャパン</h1>
-                <div class="space-x-6">
+                <div class="hamburger md:hidden">☰</div>
+                <div class="nav-menu md:flex md:space-x-6 items-center">
                     <a href="#intro" class="text-gray-600 hover:text-orange-600">イントロ</a>
                     <a href="#schedule" class="text-gray-600 hover:text-orange-600">スケジュール</a>
                     <a href="#availability" class="text-gray-600 hover:text-orange-600">空き状況</a>
                     <a href="#location" class="text-gray-600 hover:text-orange-600">場所</a>
                     <a href="#contact" class="text-gray-600 hover:text-orange-600">お問い合わせ</a>
+                    <button id="toggle-en-jp" class="text-gray-600 hover:text-orange-600">English</button>
+                    <button id="toggle-jp-jp" class="text-gray-600 hover:text-orange-600 hidden md:inline">日本語</button>
                 </div>
             </div>
         </nav>
@@ -354,23 +369,44 @@
         </footer>
     </div>
 
-    <!-- JavaScript for Language Toggle and Countdown -->
+    <!-- JavaScript for Language Toggle, Hamburger Menu, and Countdown -->
     <script>
+        // Language Toggle
         const contentEn = document.getElementById("content-en");
         const contentJp = document.getElementById("content-jp");
         const toggleEn = document.getElementById("toggle-en");
         const toggleJp = document.getElementById("toggle-jp");
+        const toggleEnJp = document.getElementById("toggle-en-jp");
+        const toggleJpJp = document.getElementById("toggle-jp-jp");
 
         toggleEn.addEventListener("click", () => {
             contentEn.classList.remove("hidden");
             contentJp.classList.add("hidden");
         });
-
         toggleJp.addEventListener("click", () => {
             contentEn.classList.add("hidden");
             contentJp.classList.remove("hidden");
         });
+        toggleEnJp.addEventListener("click", () => {
+            contentEn.classList.remove("hidden");
+            contentJp.classList.add("hidden");
+        });
+        toggleJpJp.addEventListener("click", () => {
+            contentEn.classList.add("hidden");
+            contentJp.classList.remove("hidden");
+        });
 
+        // Hamburger Menu
+        const hamburger = document.querySelectorAll(".hamburger");
+        const navMenus = document.querySelectorAll(".nav-menu");
+
+        hamburger.forEach((btn, index) => {
+            btn.addEventListener("click", () => {
+                navMenus[index].classList.toggle("active");
+            });
+        });
+
+        // Countdown
         function updateCountdown() {
             const eventDate = new Date("2025-04-12T00:00:00+09:00"); // JST
             const now = new Date();
