@@ -1,13 +1,23 @@
 export function Schedule({ heading, items }) {
   return (
-    <section style={{ padding: '40px', maxWidth: '800px', margin: '0 auto', textAlign: 'left' }}>
-      {/* Ensure the heading renders HTML correctly */}
+    <section>
       <h2 dangerouslySetInnerHTML={{ __html: heading }} />
-
-      <ul style={{ listStyle: 'none', padding: 0 }}>
+      <ul style={{ padding: '0', margin: '0', listStyle: 'none' }}>
         {items.map((item, idx) => (
-          <li key={idx} style={{ padding: '10px 0' }}>
-            <strong dangerouslySetInnerHTML={{ __html: item.time }} />: <span dangerouslySetInnerHTML={{ __html: item.activity }} />
+          <li key={idx} style={{
+            backgroundColor: '#fff',
+            padding: '15px',
+            margin: '10px 0',
+            borderRadius: '8px',
+            borderLeft: '5px solid #ff9800',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            fontSize: '1.1rem',
+            boxShadow: '0px 2px 5px rgba(0,0,0,0.1)'
+          }}>
+            <strong>{item.time}</strong>
+            <span>{item.activity}</span>
           </li>
         ))}
       </ul>
