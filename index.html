@@ -6,20 +6,36 @@
     <title>Bush Bash Japan</title>
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         body {
-            background: linear-gradient(to bottom, #f4f4f4, #e0e0e0);
+            background: linear-gradient(to bottom, #f9fafb, #e5e7eb);
             font-family: 'Inter', sans-serif;
+            color: #1f2937;
+            line-height: 1.6;
+        }
+        .nav-bar {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(8px);
+            z-index: 10;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
         }
         .section-card {
             background: white;
-            border-radius: 12px;
-            padding: 24px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            margin-bottom: 16px;
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 24px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
         }
         .hero {
-            height: 85vh;
+            height: 90vh;
             background: url('/images/bbhero.jpg') center/cover no-repeat;
             display: flex;
             justify-content: center;
@@ -32,91 +48,130 @@
             content: "";
             position: absolute;
             inset: 0;
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(0, 0, 0, 0.5);
         }
         .hero-content {
             position: relative;
             z-index: 1;
+            animation: fadeIn 1.5s ease-in-out;
         }
-        @media (max-width: 768px) {
-            .hero {
-                height: 55vh;
-            }
-            .hero-content h1 {
-                font-size: 2.5rem;
-            }
-            .hero-content p {
-                font-size: 1.5rem;
-            }
-            .section-card {
-                padding: 16px;
-            }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         .submit-button {
             background-color: #ea580c;
             color: white;
-            padding: 12px;
-            border-radius: 6px;
+            padding: 14px;
+            border-radius: 8px;
             width: 100%;
-            font-size: 1.25rem;
-            font-weight: bold;
+            font-size: 1.125rem;
+            font-weight: 600;
             text-align: center;
-            transition: background 0.3s;
+            transition: background-color 0.3s ease, transform 0.2s ease;
         }
         .submit-button:hover {
             background-color: #c2410c;
+            transform: scale(1.02);
+        }
+        footer {
+            background: #1f2937;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+        @media (max-width: 768px) {
+            .hero {
+                height: 60vh;
+            }
+            .hero-content h1 {
+                font-size: 2.75rem;
+            }
+            .hero-content p {
+                font-size: 1.25rem;
+            }
+            .section-card {
+                padding: 20px;
+            }
+            .nav-bar {
+                padding: 10px 0;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Navigation Bar -->
+    <nav class="nav-bar py-4 px-6">
+        <div class="max-w-4xl mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold text-gray-800">Bush Bash Japan</h1>
+            <div class="space-x-6">
+                <a href="#schedule" class="text-gray-600 hover:text-orange-600">Schedule</a>
+                <a href="#availability" class="text-gray-600 hover:text-orange-600">Availability</a>
+                <a href="#location" class="text-gray-600 hover:text-orange-600">Location</a>
+                <a href="#contact" class="text-gray-600 hover:text-orange-600">Contact</a>
+            </div>
+        </div>
+    </nav>
+
     <!-- Hero Section -->
     <div class="hero">
         <div class="hero-content">
-            <h1 class="text-7xl md:text-5xl font-bold">Bush Bash Japan</h1>
-            <p class="text-3xl md:text-xl mt-2">12 - 13 April 2025</p>
+            <h1 class="text-6xl md:text-4xl font-bold">Bush Bash Japan</h1>
+            <p class="text-2xl md:text-lg mt-3">12 - 13 April 2025</p>
         </div>
     </div>
 
-    <div class="max-w-4xl md:max-w-2xl mx-auto py-12 px-4">
+    <div class="max-w-4xl mx-auto py-16 px-6">
         <!-- Event Schedule -->
-        <section class="section-card">
-            <h2 class="text-2xl font-semibold">📅 Event Schedule</h2>
-            <p><b>Friday, April 11:</b> Informal Meet & Greet</p>
-            <p><b>Saturday, April 12:</b> Talks, Presentations, and Social</p>
-            <p><b>Sunday, April 13:</b> TBD</p>
+        <section id="schedule" class="section-card">
+            <h2 class="text-3xl font-semibold mb-4">📅 Event Schedule</h2>
+            <p><span class="font-bold">Friday, April 11:</span> Informal Meet & Greet</p>
+            <p><span class="font-bold">Saturday, April 12:</span> Main Event Day</p>
+            <ul class="ml-6 list-disc space-y-1">
+                <li><span class="font-bold">9:00 AM - 10:00 AM:</span> Check-in & Coffee</li>
+                <li><span class="font-bold">10:00 AM - 12:00 PM:</span> Introduction & Presentations</li>
+                <li><span class="font-bold">12:00 PM - 2:00 PM:</span> Lunch & Free Time</li>
+                <li><span class="font-bold">2:00 PM - 5:00 PM:</span> Presentations & Discussions</li>
+                <li><span class="font-bold">5:00 PM - Late:</span> Sauna, Bonfire, Dinner, Drinks, and More</li>
+            </ul>
+            <p><span class="font-bold">Sunday, April 13:</span> TBD</p>
         </section>
         
         <!-- Current Availability -->
-        <section class="section-card">
-            <h2 class="text-2xl font-semibold">🛏️ Current Availability</h2>
-            <p><b>6 Tree Houses</b> (each for 2 people)</p>
-            <p><b>16 Dormitory Spots</b> (8 male, 8 female)</p>
+        <section id="availability" class="section-card">
+            <h2 class="text-3xl font-semibold mb-4">🛏️ Current Availability</h2>
+            <p><span class="font-bold">6 Tree Houses</span> (each for 2 people)</p>
+            <p><span class="font-bold">16 Dormitory Spots</span> (8 male, 8 female)</p>
         </section>
         
         <!-- Location -->
-        <section class="section-card">
-            <h2 class="text-2xl font-semibold">📍 Location</h2>
-            <p>Bush Bash Japan will take place at <b>Lodge Kiyokawa</b> in <b>Bungo-Ōno, Oita, Japan</b>.</p>
+        <section id="location" class="section-card">
+            <h2 class="text-3xl font-semibold mb-4">📍 Location</h2>
+            <p>Bush Bash Japan will take place at <span class="font-bold">Lodge Kiyokawa</span> in <span class="font-bold">Bungo-Ōno, Oita, Japan</span>.</p>
         </section>
         
         <!-- Food Availability -->
         <section class="section-card">
-            <h2 class="text-2xl font-semibold">🍽️ Food Availability</h2>
-            <p>Food will be available for purchase at Lodge Kiyokawa.</p>
+            <h2 class="text-3xl font-semibold mb-4">🍽️ Food Availability</h2>
+            <p>Food will be available for purchase at Lodge Kiyokawa. There are also a few nearby restaurants and a Michi no Eki.</p>
         </section>
 
         <!-- Contact Form (Netlify Forms) -->
-        <section class="section-card">
-            <h2 class="text-2xl font-semibold">Reserve Your Spot / Contact Us</h2>
-            <form name="contact" method="POST" data-netlify="true" class="mt-4">
+        <section id="contact" class="section-card">
+            <h2 class="text-3xl font-semibold mb-4">Reserve Your Spot / Contact Us</h2>
+            <form name="contact" method="POST" data-netlify="true" class="mt-6 space-y-4">
                 <input type="hidden" name="form-name" value="contact">
-                <input type="text" name="name" placeholder="Your Name / Nym" class="w-full p-3 border rounded mt-2" required>
-                <input type="email" name="email" placeholder="Your Email" class="w-full p-3 border rounded mt-2" required>
-                <textarea name="message" placeholder="Your Message (English or 日本語)" class="w-full p-3 border rounded mt-2"></textarea>
-                <button type="submit" class="submit-button mt-4">Send Message</button>
+                <input type="text" name="name" placeholder="Your Name / Nym" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent" required>
+                <input type="email" name="email" placeholder="Your Email" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent" required>
+                <textarea name="message" placeholder="Your Message (English or 日本語)" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent h-32"></textarea>
+                <button type="submit" class="submit-button">Send Message</button>
             </form>
         </section>
     </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Bush Bash Japan. All rights reserved.</p>
+    </footer>
 </body>
 </html>
-
