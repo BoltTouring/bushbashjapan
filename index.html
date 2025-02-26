@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bush Bash Japan</title>
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/public/favicon.ico" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
@@ -35,8 +35,9 @@
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
         }
         .hero {
-            height: 90vh;
-            background: url('/images/bbhero.jpg') center/cover no-repeat;
+            height: 70vh; /* Reduced from 90vh */
+            max-height: 600px; /* Caps height for large screens */
+            background: url('/public/images/bbhero.jpg') center/cover no-repeat;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -54,6 +55,20 @@
             position: relative;
             z-index: 1;
             animation: fadeIn 1.5s ease-in-out;
+        }
+        .cta-button {
+            background-color: #ea580c;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 1.125rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .cta-button:hover {
+            background-color: #c2410c;
+            transform: scale(1.05);
         }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
@@ -82,7 +97,8 @@
         }
         @media (max-width: 768px) {
             .hero {
-                height: 60vh;
+                height: 50vh;
+                max-height: 400px;
             }
             .hero-content h1 {
                 font-size: 2.75rem;
@@ -113,11 +129,12 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- Hero Section with CTA -->
     <div class="hero">
         <div class="hero-content">
             <h1 class="text-6xl md:text-4xl font-bold">Bush Bash Japan</h1>
             <p class="text-2xl md:text-lg mt-3">12 - 13 April 2025</p>
+            <a href="#contact" class="cta-button mt-6 inline-block">Reserve Now</a>
         </div>
     </div>
 
@@ -171,7 +188,7 @@
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2025 Bush Bash Japan. All rights reserved.</p>
+        <p>© 2025 Bush Bash Japan. All rights reserved.</p>
     </footer>
 </body>
 </html>
