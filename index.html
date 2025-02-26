@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bush Bash Japan</title>
-    <link rel="icon" href="public/images/bitcoin-icon.png" type="image/png">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
         body {
@@ -18,8 +18,8 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
         .hero {
-            height: 75vh;
-            background: url('public/images/bbhero.jpg') center/cover no-repeat;
+            height: 85vh;
+            background: url('/images/bbhero.jpg') center/cover no-repeat;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -39,17 +39,31 @@
         }
         @media (max-width: 768px) {
             .hero {
-                height: 50vh;
+                height: 55vh;
             }
             .hero-content h1 {
-                font-size: 2rem;
+                font-size: 2.5rem;
             }
             .hero-content p {
-                font-size: 1.25rem;
+                font-size: 1.5rem;
             }
             .section-card {
                 padding: 16px;
             }
+        }
+        .submit-button {
+            background-color: #ea580c;
+            color: white;
+            padding: 12px;
+            border-radius: 6px;
+            width: 100%;
+            font-size: 1.25rem;
+            font-weight: bold;
+            text-align: center;
+            transition: background 0.3s;
+        }
+        .submit-button:hover {
+            background-color: #c2410c;
         }
     </style>
 </head>
@@ -58,53 +72,12 @@
     <!-- Hero Section -->
     <div class="hero">
         <div class="hero-content">
-            <h1 class="text-6xl md:text-4xl font-bold">Bush Bash Japan</h1>
-            <p class="text-2xl md:text-lg mt-2">12 - 13 April 2025</p>
+            <h1 class="text-7xl md:text-5xl font-bold">Bush Bash Japan</h1>
+            <p class="text-3xl md:text-xl mt-2">12 - 13 April 2025</p>
         </div>
     </div>
 
     <div class="max-w-4xl md:max-w-2xl mx-auto py-12 px-4">
-
-        <!-- Event Schedule -->
-        <section class="section-card">
-            <h2 class="text-3xl font-semibold">Event Schedule (Work in Progress)</h2>
-
-            <h3 class="text-xl font-bold mt-4">Friday, April 11 - Informal Meet & Greet</h3>
-            <p class="mt-2"><b>Evening:</b> Arrivals & informal gathering</p>
-
-            <h3 class="text-xl font-bold mt-4">Saturday, April 12 - Main Event Day</h3>
-            <ul class="mt-2 space-y-2">
-                <li><b>9:00 AM - 10:00 AM:</b> Check-in & Coffee</li>
-                <li><b>10:00 AM - 12:00 PM:</b> Introduction & Presentations</li>
-                <li><b>12:00 PM - 2:00 PM:</b> Lunch & Free Time</li>
-                <li><b>2:00 PM - 5:00 PM:</b> Presentations & Discussions</li>
-                <li><b>5:00 PM - Late:</b> Sauna, Bonfire, Dinner, Drinks, and more</li>
-            </ul>
-
-            <h3 class="text-xl font-bold mt-4">Sunday, April 13 - To Be Determined</h3>
-            <p class="mt-2"><b>TBD:</b> Activities and discussions based on attendee interest</p>
-        </section>
-
-        <!-- Current Availability -->
-        <section class="section-card mt-8">
-            <h2 class="text-2xl font-semibold">🛏️ Current Availability</h2>
-            <p class="mt-2">
-                <b>6 Tree Houses</b> (up to 2 people)<br>
-                <b>16 Dormitory Spots</b> (8 male, 8 female)
-            </p>
-        </section>
-
-        <!-- Location -->
-        <section class="section-card mt-8">
-            <h2 class="text-2xl font-semibold">📍 Location</h2>
-            <p class="mt-2">Bush Bash Japan will take place at <b>Lodge Kiyokawa</b> in <b>Bungo-Ōno, Oita, Japan</b>. The lodge is surrounded by stunning nature, offering a great setting for outdoor activities and relaxation.</p>
-        </section>
-
-        <!-- Food Availability -->
-        <section class="section-card mt-8">
-            <h2 class="text-2xl font-semibold">🍽️ Food Availability</h2>
-            <p class="mt-2">Food will be available for purchase at Lodge Kiyokawa - more info forthcoming. There are also a few nearby restaurants and a Michi no Eki.</p>
-        </section>
 
         <!-- Contact Form (Netlify Forms) -->
         <section class="section-card mt-8">
@@ -114,10 +87,9 @@
                 <input type="text" name="name" placeholder="Your Name / Nym" class="w-full p-3 border rounded mt-2" required>
                 <input type="email" name="email" placeholder="Your Email" class="w-full p-3 border rounded mt-2" required>
                 <textarea name="message" placeholder="Your Message (English or 日本語)" class="w-full p-3 border rounded mt-2"></textarea>
-                <button type="submit" class="bg-orange-600 hover:bg-orange-700 text-white py-3 px-4 rounded mt-4 w-full">Send Message</button>
+                <button type="submit" class="submit-button mt-4">Send Message</button>
             </form>
         </section>
-
     </div>
 
 </body>
