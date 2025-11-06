@@ -8,6 +8,9 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+JP:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
+        html {
+            scroll-behavior: smooth;
+        }
         body {
             background: linear-gradient(to bottom, #f9fafb, #e5e7eb);
             font-family: 'Inter', sans-serif;
@@ -32,13 +35,14 @@
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
             margin-bottom: 24px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 4px solid #ea580c;
         }
         .section-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
         }
         .intro-card {
-            border: 1px solid #e5e7eb;
+            border-left: 4px solid #ea580c;
         }
         .hero {
             height: 70vh;
@@ -118,9 +122,86 @@
         }
         .hamburger {
             display: none;
+            transition: transform 0.3s ease;
+        }
+        .hamburger.active {
+            transform: rotate(90deg);
         }
         .nav-menu {
             transition: all 0.3s ease-in-out;
+            transform-origin: top;
+        }
+        .nav-menu.active {
+            animation: slideDown 0.3s ease-out;
+        }
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .archive-header {
+            cursor: pointer;
+            user-select: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .archive-header::after {
+            content: "▼";
+            font-size: 0.75rem;
+            transition: transform 0.3s ease;
+            color: #6b7280;
+        }
+        .archive-header.collapsed::after {
+            transform: rotate(-90deg);
+        }
+        .archive-content {
+            max-height: 2000px;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out, opacity 0.3s ease;
+            opacity: 1;
+        }
+        .archive-content.collapsed {
+            max-height: 0;
+            opacity: 0;
+            margin-top: 0;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: #ea580c;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(234, 88, 12, 0.3);
+            font-size: 1.5rem;
+        }
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        .back-to-top:hover {
+            background-color: #c2410c;
+            transform: translateY(-5px);
+            box-shadow: 0 6px 16px rgba(234, 88, 12, 0.4);
+        }
+        .archive-card {
+            border-left: 2px dashed #d1d5db !important;
         }
         @media (max-width: 768px) {
             .hero {
@@ -179,6 +260,7 @@
                     <a href="#availability" class="text-gray-600 hover:text-orange-600">Availability</a>
                     <a href="#location" class="text-gray-600 hover:text-orange-600">Location</a>
                     <a href="#contact" class="text-gray-600 hover:text-orange-600">Contact</a>
+                    <a href="#archive" class="text-gray-600 hover:text-orange-600">2025 Archive</a>
                     <button id="toggle-en" class="text-gray-600 hover:text-orange-600 hidden md:inline">English</button>
                     <button id="toggle-jp" class="text-gray-600 hover:text-orange-600">日本語</button>
                 </div>
@@ -189,7 +271,7 @@
         <div class="hero">
             <div class="hero-content">
                 <h1 class="text-6xl md:text-4xl font-bold">Bush Bash Japan</h1>
-                <p class="text-2xl md:text-lg mt-3">12 - 13 April 2025</p>
+                <p class="text-2xl md:text-lg mt-3">25 - 26 April 2026</p>
                 <div id="countdown-en" class="countdown"></div>
                 <a href="#contact" class="cta-button mt-6 inline-block">Reserve Now</a>
             </div>
@@ -199,39 +281,18 @@
             <!-- Intro Section -->
             <section id="intro" class="section-card intro-card">
                 <h2 class="text-3xl font-semibold mb-4">Bush Bash Japan 🇯🇵</h2>
-                <p>Join us for the inaugural Bush Bash Japan, inspired by Bush Bash Australia. This informal weekend brings Bitcoiners together in the Japanese countryside—no event cost, no KYC, just great discussions and experiences. As more participants confirm their attendance, the schedule and activities will be updated.</p>
+                <p>Join us for the second Bush Bash Japan, inspired by Bush Bash Australia. This informal weekend brings Bitcoiners together in the Japanese countryside—no event cost, no KYC, just great discussions and experiences. As more participants confirm their attendance, the schedule and activities will be updated.</p>
             </section>
 
             <!-- Event Schedule -->
             <section id="schedule" class="section-card">
-                <h2 class="text-3xl font-semibold mb-4">📅 Event Schedule (Work in Progress)</h2>
+                <h2 class="text-3xl font-semibold mb-4">📅 Event Schedule</h2>
                 <div class="space-y-4">
                     <div class="schedule-day">
-                        <p><span class="font-bold">Friday, April 11:</span> Informal Meet & Greet (Evening)</p>
+                        <p><span class="font-bold">Saturday, April 25:</span> TBD</p>
                     </div>
                     <div class="schedule-day">
-                        <p><span class="font-bold">Saturday, April 12:</span> Main Event Day</p>
-                        <ul class="ml-6 list-disc space-y-1">
-                            <li><span class="font-bold">9:00 AM - 10:00 AM:</span> Check-in & Coffee</li>
-                            <li><span class="font-bold">10:00 AM - 12:00 PM:</span> Introduction & Presentations</li>
-                            <li><span class="font-bold">12:00 PM - 2:00 PM:</span> Lunch & Free Time</li>
-                            <li><span class="font-bold">2:00 PM - 5:00 PM:</span> Presentations & Discussions</li>
-                            <li><span class="font-bold">5:00 PM - Late:</span> Sauna, Bonfire, Dinner, Drinks, and More</li>
-                        </ul>
-                    </div>
-                    <div class="schedule-day">
-                        <p><span class="font-bold">Sunday, April 13:</span></p>
-                        <ul class="ml-6 list-disc space-y-1">
-                            <li><span class="font-bold">7:30 AM - 9:00 AM:</span> Breakfast & Pack-up</li>
-                            <li><span class="font-bold">10:00 AM:</span> Lodge Checkout</li>
-                            <li><span class="font-bold">10:30 AM - 4:00 PM:</span> Optional Activities:
-                                <ul class="ml-6 list-disc space-y-1">
-                                    <li>River Rafting</li>
-                                    <li>Bamboo Fishing</li>
-                                    <li>Bicycle Rental</li>
-                                </ul>
-                            </li>
-                        </ul>
+                        <p><span class="font-bold">Sunday, April 26:</span> TBD</p>
                     </div>
                 </div>
             </section>
@@ -273,11 +334,49 @@
             </section>
         </div>
 
+        <!-- 2025 Archive Section -->
+        <section id="archive" class="max-w-4xl mx-auto py-16 px-6">
+            <div class="section-card archive-card" style="background: #f9fafb;">
+                <div class="archive-header" id="archive-header-en">
+                    <h2 class="text-3xl font-semibold text-gray-600">📚 2025 Archive</h2>
+                </div>
+                <div class="archive-content" id="archive-content-en">
+                    <p class="text-gray-600 mb-6 mt-4">Information from the inaugural Bush Bash Japan event.</p>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2">Event Dates</h3>
+                            <p class="text-gray-700">12 - 13 April 2025</p>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2">Event Schedule</h3>
+                            <div class="space-y-2 text-gray-700">
+                                <p><span class="font-bold">Friday, April 11:</span> Informal Meet & Greet (Evening)</p>
+                                <p><span class="font-bold">Saturday, April 12:</span> Main Event Day</p>
+                                <ul class="ml-6 list-disc space-y-1">
+                                    <li><span class="font-bold">9:00 AM - 10:00 AM:</span> Check-in & Coffee</li>
+                                    <li><span class="font-bold">10:00 AM - 12:00 PM:</span> Introduction & Presentations</li>
+                                    <li><span class="font-bold">12:00 PM - 2:00 PM:</span> Lunch & Free Time</li>
+                                    <li><span class="font-bold">2:00 PM - 5:00 PM:</span> Presentations & Discussions</li>
+                                    <li><span class="font-bold">5:00 PM - Late:</span> Sauna, Bonfire, Dinner, Drinks, and More</li>
+                                </ul>
+                                <p><span class="font-bold">Sunday, April 13:</span> TBD</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Footer -->
         <footer>
-            <p>© 2025 Bush Bash Japan. All rights reserved.</p>
+            <p>© 2026 Bush Bash Japan. All rights reserved.</p>
         </footer>
     </div>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="back-to-top" aria-label="Back to top">↑</button>
 
     <!-- Japanese Content -->
     <div id="content-jp" class="hidden jp">
@@ -292,6 +391,7 @@
                     <a href="#availability" class="text-gray-600 hover:text-orange-600">空き状況</a>
                     <a href="#location" class="text-gray-600 hover:text-orange-600">場所</a>
                     <a href="#contact" class="text-gray-600 hover:text-orange-600">お問い合わせ</a>
+                    <a href="#archive" class="text-gray-600 hover:text-orange-600">2025アーカイブ</a>
                     <button id="toggle-en-jp" class="text-gray-600 hover:text-orange-600">English</button>
                     <button id="toggle-jp-jp" class="text-gray-600 hover:text-orange-600 hidden md:inline">日本語</button>
                 </div>
@@ -302,7 +402,7 @@
         <div class="hero">
             <div class="hero-content">
                 <h1 class="text-6xl md:text-4xl font-bold">ブッシュバッシュジャパン</h1>
-                <p class="text-2xl md:text-lg mt-3">2025年4月12日 - 13日</p>
+                <p class="text-2xl md:text-lg mt-3">2026年4月25日 - 26日</p>
                 <div id="countdown-jp" class="countdown"></div>
                 <a href="#contact" class="cta-button mt-6 inline-block">今すぐ予約</a>
             </div>
@@ -312,39 +412,18 @@
             <!-- Intro Section -->
             <section id="intro" class="section-card intro-card">
                 <h2 class="text-3xl font-semibold mb-4">ブッシュバッシュジャパン 🇯🇵</h2>
-                <p>ブッシュバッシュオーストラリアに触発された初のブッシュバッシュジャパンにご参加ください。この非公式な週末は、日本の田舎でビットコイナーたちを集めます—イベント費用なし、KYCなし、素晴らしい議論と体験だけです。参加者が確定するにつれて、スケジュールとアクティビティが更新されます。</p>
+                <p>ブッシュバッシュオーストラリアに触発された2回目のブッシュバッシュジャパンにご参加ください。この非公式な週末は、日本の田舎でビットコイナーたちを集めます—イベント費用なし、KYCなし、素晴らしい議論と体験だけです。参加者が確定するにつれて、スケジュールとアクティビティが更新されます。</p>
             </section>
 
             <!-- Event Schedule -->
             <section id="schedule" class="section-card">
-                <h2 class="text-3xl font-semibold mb-4">📅 イベントスケジュール (進行中)</h2>
+                <h2 class="text-3xl font-semibold mb-4">📅 イベントスケジュール</h2>
                 <div class="space-y-4">
                     <div class="schedule-day">
-                        <p><span class="font-bold">4月11日(金):</span> インフォーマルなミート＆グリート (夕方)</p>
+                        <p><span class="font-bold">4月25日(土):</span> 未定</p>
                     </div>
                     <div class="schedule-day">
-                        <p><span class="font-bold">4月12日(土):</span> メインイベント日</p>
-                        <ul class="ml-6 list-disc space-y-1">
-                            <li><span class="font-bold">午前9:00 - 10:00:</span> チェックイン＆コーヒー</li>
-                            <li><span class="font-bold">午前10:00 - 正午:</span> 紹介＆プレゼンテーション</li>
-                            <li><span class="font-bold">正午 - 午後2:00:</span> ランチ＆自由時間</li>
-                            <li><span class="font-bold">午後2:00 - 5:00:</span> プレゼンテーション＆ディスカッション</li>
-                            <li><span class="font-bold">午後5:00 - 深夜:</span> サウナ、焚き火、ディナー、ドリンクなど</li>
-                        </ul>
-                    </div>
-                    <div class="schedule-day">
-                        <p><span class="font-bold">4月13日(日):</span></p>
-                        <ul class="ml-6 list-disc space-y-1">
-                            <li><span class="font-bold">午前7:30 - 9:00:</span> 朝食＆荷造り</li>
-                            <li><span class="font-bold">午前10:00:</span> ロッジのチェックアウト</li>
-                            <li><span class="font-bold">午前10:30 - 午後4:00:</span> オプションのアクティビティ：
-                                <ul class="ml-6 list-disc space-y-1">
-                                    <li>川下り</li>
-                                    <li>竹釣り</li>
-                                    <li>自転車レンタル</li>
-                                </ul>
-                            </li>
-                        </ul>
+                        <p><span class="font-bold">4月26日(日):</span> 未定</p>
                     </div>
                 </div>
             </section>
@@ -386,9 +465,44 @@
             </section>
         </div>
 
+        <!-- 2025 Archive Section -->
+        <section id="archive" class="max-w-4xl mx-auto py-16 px-6">
+            <div class="section-card archive-card" style="background: #f9fafb;">
+                <div class="archive-header" id="archive-header-jp">
+                    <h2 class="text-3xl font-semibold text-gray-600">📚 2025アーカイブ</h2>
+                </div>
+                <div class="archive-content" id="archive-content-jp">
+                    <p class="text-gray-600 mb-6 mt-4">初回ブッシュバッシュジャパンイベントの情報。</p>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2">イベント日程</h3>
+                            <p class="text-gray-700">2025年4月12日 - 13日</p>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2">イベントスケジュール</h3>
+                            <div class="space-y-2 text-gray-700">
+                                <p><span class="font-bold">4月11日(金):</span> インフォーマルなミート＆グリート (夕方)</p>
+                                <p><span class="font-bold">4月12日(土):</span> メインイベント日</p>
+                                <ul class="ml-6 list-disc space-y-1">
+                                    <li><span class="font-bold">午前9:00 - 10:00:</span> チェックイン＆コーヒー</li>
+                                    <li><span class="font-bold">午前10:00 - 正午:</span> 紹介＆プレゼンテーション</li>
+                                    <li><span class="font-bold">正午 - 午後2:00:</span> ランチ＆自由時間</li>
+                                    <li><span class="font-bold">午後2:00 - 5:00:</span> プレゼンテーション＆ディスカッション</li>
+                                    <li><span class="font-bold">午後5:00 - 深夜:</span> サウナ、焚き火、ディナー、ドリンクなど</li>
+                                </ul>
+                                <p><span class="font-bold">4月13日(日):</span> 未定</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Footer -->
         <footer>
-            <p>© 2025 ブッシュバッシュジャパン。全権利予約。</p>
+            <p>© 2026 ブッシュバッシュジャパン。全権利予約。</p>
         </footer>
     </div>
 
@@ -425,13 +539,14 @@
 
         hamburger.forEach((btn, index) => {
             btn.addEventListener("click", () => {
+                btn.classList.toggle("active");
                 navMenus[index].classList.toggle("active");
             });
         });
 
         // Countdown
         function updateCountdown() {
-            const eventDate = new Date("2025-04-12T00:00:00+09:00"); // JST
+            const eventDate = new Date("2026-04-25T00:00:00+09:00"); // JST
             const now = new Date();
             const timeLeft = eventDate - now;
 
@@ -448,6 +563,59 @@
 
         setInterval(updateCountdown, 1000);
         updateCountdown(); // Initial call
+
+        // Archive Section Collapse/Expand
+        const archiveHeaderEn = document.getElementById("archive-header-en");
+        const archiveContentEn = document.getElementById("archive-content-en");
+        const archiveHeaderJp = document.getElementById("archive-header-jp");
+        const archiveContentJp = document.getElementById("archive-content-jp");
+
+        if (archiveHeaderEn && archiveContentEn) {
+            archiveHeaderEn.addEventListener("click", () => {
+                archiveHeaderEn.classList.toggle("collapsed");
+                archiveContentEn.classList.toggle("collapsed");
+            });
+        }
+
+        if (archiveHeaderJp && archiveContentJp) {
+            archiveHeaderJp.addEventListener("click", () => {
+                archiveHeaderJp.classList.toggle("collapsed");
+                archiveContentJp.classList.toggle("collapsed");
+            });
+        }
+
+        // Back to Top Button
+        const backToTopButton = document.getElementById("back-to-top");
+        
+        function toggleBackToTop() {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add("visible");
+            } else {
+                backToTopButton.classList.remove("visible");
+            }
+        }
+
+        window.addEventListener("scroll", toggleBackToTop);
+        
+        if (backToTopButton) {
+            backToTopButton.addEventListener("click", () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
+            });
+        }
+
+        // Close mobile menu when clicking on a link
+        const navLinks = document.querySelectorAll(".nav-menu a");
+        navLinks.forEach(link => {
+            link.addEventListener("click", () => {
+                hamburger.forEach((btn, index) => {
+                    btn.classList.remove("active");
+                    navMenus[index].classList.remove("active");
+                });
+            });
+        });
     </script>
 </body>
 </html>
