@@ -163,13 +163,15 @@
         .archive-content {
             max-height: 2000px;
             overflow: hidden;
-            transition: max-height 0.5s ease-out, opacity 0.3s ease;
+            transition: max-height 0.5s ease-out, opacity 0.3s ease, padding 0.5s ease-out;
             opacity: 1;
         }
         .archive-content.collapsed {
             max-height: 0;
             opacity: 0;
             margin-top: 0;
+            padding-top: 0;
+            padding-bottom: 0;
         }
         .back-to-top {
             position: fixed;
@@ -260,7 +262,7 @@
                     <a href="#availability" class="text-gray-600 hover:text-orange-600">Availability</a>
                     <a href="#location" class="text-gray-600 hover:text-orange-600">Location</a>
                     <a href="#contact" class="text-gray-600 hover:text-orange-600">Contact</a>
-                    <a href="#archive" class="text-gray-600 hover:text-orange-600">2025 Archive</a>
+                    <a href="#archive" class="text-gray-600 hover:text-orange-600">2025</a>
                     <button id="toggle-en" class="text-gray-600 hover:text-orange-600 hidden md:inline">English</button>
                     <button id="toggle-jp" class="text-gray-600 hover:text-orange-600">日本語</button>
                 </div>
@@ -292,7 +294,18 @@
                         <p><span class="font-bold">Saturday, April 25:</span> TBD</p>
                     </div>
                     <div class="schedule-day">
-                        <p><span class="font-bold">Sunday, April 26:</span> TBD</p>
+                        <p><span class="font-bold">Sunday, April 26:</span></p>
+                        <ul class="ml-6 list-disc space-y-1">
+                            <li><span class="font-bold">7:30 AM - 9:00 AM:</span> Breakfast & Pack-up</li>
+                            <li><span class="font-bold">10:00 AM:</span> Lodge Checkout</li>
+                            <li><span class="font-bold">10:30 AM - 4:00 PM:</span> Optional Activities:
+                                <ul class="ml-6 list-disc space-y-1">
+                                    <li>River Rafting</li>
+                                    <li>Bamboo Fishing</li>
+                                    <li>Bicycle Rental</li>
+                                </ul>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </section>
@@ -337,10 +350,10 @@
         <!-- 2025 Archive Section -->
         <section id="archive" class="max-w-4xl mx-auto py-16 px-6">
             <div class="section-card archive-card" style="background: #f9fafb;">
-                <div class="archive-header" id="archive-header-en">
+                <div class="archive-header collapsed" id="archive-header-en">
                     <h2 class="text-3xl font-semibold text-gray-600">📚 2025 Archive</h2>
                 </div>
-                <div class="archive-content" id="archive-content-en">
+                <div class="archive-content collapsed" id="archive-content-en">
                     <p class="text-gray-600 mb-6 mt-4">Information from the inaugural Bush Bash Japan event.</p>
                     
                     <div class="space-y-6">
@@ -391,7 +404,7 @@
                     <a href="#availability" class="text-gray-600 hover:text-orange-600">空き状況</a>
                     <a href="#location" class="text-gray-600 hover:text-orange-600">場所</a>
                     <a href="#contact" class="text-gray-600 hover:text-orange-600">お問い合わせ</a>
-                    <a href="#archive" class="text-gray-600 hover:text-orange-600">2025アーカイブ</a>
+                    <a href="#archive" class="text-gray-600 hover:text-orange-600">2025</a>
                     <button id="toggle-en-jp" class="text-gray-600 hover:text-orange-600">English</button>
                     <button id="toggle-jp-jp" class="text-gray-600 hover:text-orange-600 hidden md:inline">日本語</button>
                 </div>
@@ -423,7 +436,18 @@
                         <p><span class="font-bold">4月25日(土):</span> 未定</p>
                     </div>
                     <div class="schedule-day">
-                        <p><span class="font-bold">4月26日(日):</span> 未定</p>
+                        <p><span class="font-bold">4月26日(日):</span></p>
+                        <ul class="ml-6 list-disc space-y-1">
+                            <li><span class="font-bold">午前7:30 - 9:00:</span> 朝食＆荷造り</li>
+                            <li><span class="font-bold">午前10:00:</span> ロッジのチェックアウト</li>
+                            <li><span class="font-bold">午前10:30 - 午後4:00:</span> オプションのアクティビティ：
+                                <ul class="ml-6 list-disc space-y-1">
+                                    <li>川下り</li>
+                                    <li>竹釣り</li>
+                                    <li>自転車レンタル</li>
+                                </ul>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </section>
@@ -468,10 +492,10 @@
         <!-- 2025 Archive Section -->
         <section id="archive" class="max-w-4xl mx-auto py-16 px-6">
             <div class="section-card archive-card" style="background: #f9fafb;">
-                <div class="archive-header" id="archive-header-jp">
+                <div class="archive-header collapsed" id="archive-header-jp">
                     <h2 class="text-3xl font-semibold text-gray-600">📚 2025アーカイブ</h2>
                 </div>
-                <div class="archive-content" id="archive-content-jp">
+                <div class="archive-content collapsed" id="archive-content-jp">
                     <p class="text-gray-600 mb-6 mt-4">初回ブッシュバッシュジャパンイベントの情報。</p>
                     
                     <div class="space-y-6">
