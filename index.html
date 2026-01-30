@@ -213,6 +213,82 @@
         .archive-card {
             border-left: 2px dashed #d1d5db !important;
         }
+        .highlight-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: linear-gradient(135deg, #ea580c 0%, #f97316 100%);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 9999px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+            margin-top: 16px;
+        }
+        .feature-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 16px 12px;
+            background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+            border-radius: 12px;
+            text-align: center;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .feature-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(234, 88, 12, 0.15);
+        }
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+        .feature-text {
+            font-weight: 600;
+            color: #9a3412;
+            font-size: 0.875rem;
+        }
+        .info-banner {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-left: 4px solid #f59e0b;
+            padding: 16px 20px;
+            border-radius: 0 12px 12px 0;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .info-banner-icon {
+            font-size: 1.5rem;
+        }
+        .venue-highlights {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+        }
+        .venue-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #f3f4f6;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            color: #374151;
+        }
         @media (max-width: 768px) {
             .hero {
                 height: 50vh;
@@ -281,7 +357,7 @@
         <div class="hero">
             <div class="hero-content">
                 <h1 class="text-6xl md:text-4xl font-bold">Bush Bash Japan</h1>
-                <p class="text-2xl md:text-lg mt-3">25 - 26 April 2026</p>
+                <p class="text-2xl md:text-lg mt-3">18 - 19 April 2026</p>
                 <div id="countdown-en" class="countdown"></div>
                 <a href="#contact" class="cta-button mt-6 inline-block">Reserve Now</a>
             </div>
@@ -299,10 +375,30 @@
                 <h2 class="text-3xl font-semibold mb-4">📅 Event Schedule</h2>
                 <div class="space-y-4">
                     <div class="schedule-day">
-                        <p><span class="font-bold">Saturday, April 25:</span> TBD</p>
+                        <p class="flex items-center gap-2"><span class="text-2xl">🌙</span><span class="font-bold">Friday, April 17:</span> Informal Meet & Greet (Evening)</p>
                     </div>
                     <div class="schedule-day">
-                        <p><span class="font-bold">Sunday, April 26:</span> TBD</p>
+                        <p class="flex items-center gap-2 mb-3"><span class="text-2xl">☀️</span><span class="font-bold">Saturday, April 18:</span> Main Event Day</p>
+                        <ul class="ml-8 space-y-2 text-gray-700">
+                            <li class="flex items-center gap-2"><span>☕</span><span class="font-semibold">9:00 - 10:00 AM:</span> Check-in & Coffee</li>
+                            <li class="flex items-center gap-2"><span>🎤</span><span class="font-semibold">10:00 AM - 12:00 PM:</span> Introduction & Presentations</li>
+                            <li class="flex items-center gap-2"><span>🍱</span><span class="font-semibold">12:00 - 3:00 PM:</span> Lunch & Free Time</li>
+                            <li class="flex items-center gap-2"><span>🌾</span><span class="font-semibold">3:00 - 5:00 PM:</span> Farm Visit <span class="highlight-badge">New!</span></li>
+                            <li class="flex items-center gap-2"><span>🔥</span><span class="font-semibold">5:00 PM - Late:</span> Sauna, Bonfire, Dinner, Drinks & More</li>
+                        </ul>
+                    </div>
+                    <div class="schedule-day">
+                        <p class="flex items-center gap-2 mb-3"><span class="text-2xl">🌅</span><span class="font-bold">Sunday, April 19:</span></p>
+                        <ul class="ml-8 space-y-2 text-gray-700">
+                            <li class="flex items-center gap-2"><span>🍳</span><span class="font-semibold">7:30 - 9:00 AM:</span> Breakfast & Pack-up</li>
+                            <li class="flex items-center gap-2"><span>🏠</span><span class="font-semibold">10:00 AM:</span> Lodge Checkout</li>
+                            <li class="flex items-center gap-2"><span>🎯</span><span class="font-semibold">10:30 AM - 4:00 PM:</span> Optional Activities</li>
+                        </ul>
+                        <div class="ml-12 mt-2 flex flex-wrap gap-3">
+                            <span class="inline-flex items-center gap-1 bg-orange-50 text-orange-700 px-3 py-1 rounded-full text-sm">🚣 River Rafting</span>
+                            <span class="inline-flex items-center gap-1 bg-orange-50 text-orange-700 px-3 py-1 rounded-full text-sm">🎣 Bamboo Fishing</span>
+                            <span class="inline-flex items-center gap-1 bg-orange-50 text-orange-700 px-3 py-1 rounded-full text-sm">🚲 Bicycle Rental</span>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -311,10 +407,26 @@
             <section id="availability" class="section-card">
                 <h2 class="text-3xl font-semibold mb-4">🛏️ Current Availability</h2>
                 <p>Availability for Saturday evening at <a href="https://lodge-kiyokawa.jp/" target="_blank" class="font-bold text-orange-600 hover:underline">Lodge Kiyokawa</a></p>
-                <div class="mt-4 border-t pt-4">
-                    <p><span class="font-bold">6 Tree Houses</span> (up to 2 people each)</p>
-                    <p><span class="font-bold">16 Dormitory Spots</span> (8 male, 8 female)</p>
-                    <p class="text-sm text-gray-600">Note: Enquire about Friday or Sunday availability in the contact form below.</p>
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <span class="feature-icon">🏡</span>
+                        <span class="feature-text">6 Tree Houses</span>
+                        <span class="text-xs text-gray-500 mt-1">up to 2 people each</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">🛏️</span>
+                        <span class="feature-text">8 Male Dorm</span>
+                        <span class="text-xs text-gray-500 mt-1">dormitory spots</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">🛏️</span>
+                        <span class="feature-text">8 Female Dorm</span>
+                        <span class="text-xs text-gray-500 mt-1">dormitory spots</span>
+                    </div>
+                </div>
+                <div class="info-banner">
+                    <span class="info-banner-icon">💡</span>
+                    <p class="text-sm text-amber-800">Enquire about Friday or Sunday availability in the contact form below.</p>
                 </div>
             </section>
             
@@ -322,7 +434,14 @@
             <section id="location" class="section-card">
                 <h2 class="text-3xl font-semibold mb-4">📍 Location</h2>
                 <p>Bush Bash Japan will take place at <a href="https://lodge-kiyokawa.jp/" target="_blank" class="font-bold text-orange-600 hover:underline">Lodge Kiyokawa</a> in <span class="font-bold">Bungo-Ōno, Oita, Japan</span>.</p>
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3355.996760732131!2d131.57039321520954!3d32.86736398101367!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3546b7e7c7e7c7e7%3A0x8e8f8c8e8f8c8e8f!2s158%20Kiyokawamachi%20Utaeda%2C%20Bungoono%2C%20Oita%20879-6911%2C%20Japan!5e0!3m2!1sen!2sjp!4v1677654321987!5m2!1sen!2sjp" width="100%" height="300" style="border:0; margin-top: 16px;" allowfullscreen loading="lazy"></iframe>
+                <div class="venue-highlights">
+                    <span class="venue-tag">🌲 Nature Retreat</span>
+                    <span class="venue-tag">🧖 Sauna</span>
+                    <span class="venue-tag">🔥 Bonfire Area</span>
+                    <span class="venue-tag">🏔️ Mountain Views</span>
+                    <span class="venue-tag">🚗 Free Parking</span>
+                </div>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3355.996760732131!2d131.57039321520954!3d32.86736398101367!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3546b7e7c7e7c7e7%3A0x8e8f8c8e8f8c8e8f!2s158%20Kiyokawamachi%20Utaeda%2C%20Bungoono%2C%20Oita%20879-6911%2C%20Japan!5e0!3m2!1sen!2sjp!4v1677654321987!5m2!1sen!2sjp" width="100%" height="300" style="border:0; margin-top: 16px; border-radius: 12px;" allowfullscreen loading="lazy"></iframe>
             </section>
             
             <!-- Food Availability -->
@@ -423,7 +542,7 @@
         <div class="hero">
             <div class="hero-content">
                 <h1 class="text-6xl md:text-4xl font-bold">ブッシュバッシュジャパン</h1>
-                <p class="text-2xl md:text-lg mt-3">2026年4月25日 - 26日</p>
+                <p class="text-2xl md:text-lg mt-3">2026年4月18日 - 19日</p>
                 <div id="countdown-jp" class="countdown"></div>
                 <a href="#contact" class="cta-button mt-6 inline-block">今すぐ予約</a>
             </div>
@@ -441,10 +560,30 @@
                 <h2 class="text-3xl font-semibold mb-4">📅 イベントスケジュール</h2>
                 <div class="space-y-4">
                     <div class="schedule-day">
-                        <p><span class="font-bold">4月25日(土):</span> 未定</p>
+                        <p class="flex items-center gap-2"><span class="text-2xl">🌙</span><span class="font-bold">4月17日(金):</span> インフォーマルなミート＆グリート (夕方)</p>
                     </div>
                     <div class="schedule-day">
-                        <p><span class="font-bold">4月26日(日):</span> 未定</p>
+                        <p class="flex items-center gap-2 mb-3"><span class="text-2xl">☀️</span><span class="font-bold">4月18日(土):</span> メインイベント日</p>
+                        <ul class="ml-8 space-y-2 text-gray-700">
+                            <li class="flex items-center gap-2"><span>☕</span><span class="font-semibold">午前9:00 - 10:00:</span> チェックイン＆コーヒー</li>
+                            <li class="flex items-center gap-2"><span>🎤</span><span class="font-semibold">午前10:00 - 正午:</span> 紹介＆プレゼンテーション</li>
+                            <li class="flex items-center gap-2"><span>🍱</span><span class="font-semibold">正午 - 午後3:00:</span> ランチ＆自由時間</li>
+                            <li class="flex items-center gap-2"><span>🌾</span><span class="font-semibold">午後3:00 - 5:00:</span> ファームビジット <span class="highlight-badge">New!</span></li>
+                            <li class="flex items-center gap-2"><span>🔥</span><span class="font-semibold">午後5:00 - 深夜:</span> サウナ、焚き火、ディナー、ドリンクなど</li>
+                        </ul>
+                    </div>
+                    <div class="schedule-day">
+                        <p class="flex items-center gap-2 mb-3"><span class="text-2xl">🌅</span><span class="font-bold">4月19日(日):</span></p>
+                        <ul class="ml-8 space-y-2 text-gray-700">
+                            <li class="flex items-center gap-2"><span>🍳</span><span class="font-semibold">午前7:30 - 9:00:</span> 朝食＆荷造り</li>
+                            <li class="flex items-center gap-2"><span>🏠</span><span class="font-semibold">午前10:00:</span> ロッジのチェックアウト</li>
+                            <li class="flex items-center gap-2"><span>🎯</span><span class="font-semibold">午前10:30 - 午後4:00:</span> オプションのアクティビティ</li>
+                        </ul>
+                        <div class="ml-12 mt-2 flex flex-wrap gap-3">
+                            <span class="inline-flex items-center gap-1 bg-orange-50 text-orange-700 px-3 py-1 rounded-full text-sm">🚣 川下り</span>
+                            <span class="inline-flex items-center gap-1 bg-orange-50 text-orange-700 px-3 py-1 rounded-full text-sm">🎣 竹釣り</span>
+                            <span class="inline-flex items-center gap-1 bg-orange-50 text-orange-700 px-3 py-1 rounded-full text-sm">🚲 自転車レンタル</span>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -453,10 +592,26 @@
             <section id="availability" class="section-card">
                 <h2 class="text-3xl font-semibold mb-4">🛏️ 現在の空き状況</h2>
                 <p><a href="https://lodge-kiyokawa.jp/" target="_blank" class="font-bold text-orange-600 hover:underline">ロッジ清川</a>での土曜日の夜の空き状況</p>
-                <div class="mt-4 border-t pt-4">
-                    <p><span class="font-bold">6つのツリーハウス</span> (各最大2名)</p>
-                    <p><span class="font-bold">16のドミトリースポット</span> (男性8名、女性8名)</p>
-                    <p class="text-sm text-gray-600">注: 金曜日または日曜日の空き状況については、以下の連絡フォームでお問い合わせください。</p>
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <span class="feature-icon">🏡</span>
+                        <span class="feature-text">6つのツリーハウス</span>
+                        <span class="text-xs text-gray-500 mt-1">各最大2名</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">🛏️</span>
+                        <span class="feature-text">男性ドミトリー8名</span>
+                        <span class="text-xs text-gray-500 mt-1">ドミトリースポット</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">🛏️</span>
+                        <span class="feature-text">女性ドミトリー8名</span>
+                        <span class="text-xs text-gray-500 mt-1">ドミトリースポット</span>
+                    </div>
+                </div>
+                <div class="info-banner">
+                    <span class="info-banner-icon">💡</span>
+                    <p class="text-sm text-amber-800">金曜日または日曜日の空き状況については、以下の連絡フォームでお問い合わせください。</p>
                 </div>
             </section>
             
@@ -464,7 +619,14 @@
             <section id="location" class="section-card">
                 <h2 class="text-3xl font-semibold mb-4">📍 場所</h2>
                 <p>ブッシュバッシュジャパンは、大分県豊後大野市の<a href="https://lodge-kiyokawa.jp/" target="_blank" class="font-bold text-orange-600 hover:underline">ロッジ清川</a>で開催されます。</p>
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3355.996760732131!2d131.57039321520954!3d32.86736398101367!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3546b7e7c7e7c7e7%3A0x8e8f8c8e8f8c8e8f!2s158%20Kiyokawamachi%20Utaeda%2C%20Bungoono%2C%20Oita%20879-6911%2C%20Japan!5e0!3m2!1sen!2sjp!4v1677654321987!5m2!1sen!2sjp" width="100%" height="300" style="border:0; margin-top: 16px;" allowfullscreen loading="lazy"></iframe>
+                <div class="venue-highlights">
+                    <span class="venue-tag">🌲 自然の中</span>
+                    <span class="venue-tag">🧖 サウナ</span>
+                    <span class="venue-tag">🔥 焚き火エリア</span>
+                    <span class="venue-tag">🏔️ 山の景色</span>
+                    <span class="venue-tag">🚗 無料駐車場</span>
+                </div>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3355.996760732131!2d131.57039321520954!3d32.86736398101367!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3546b7e7c7e7c7e7%3A0x8e8f8c8e8f8c8e8f!2s158%20Kiyokawamachi%20Utaeda%2C%20Bungoono%2C%20Oita%20879-6911%2C%20Japan!5e0!3m2!1sen!2sjp!4v1677654321987!5m2!1sen!2sjp" width="100%" height="300" style="border:0; margin-top: 16px; border-radius: 12px;" allowfullscreen loading="lazy"></iframe>
             </section>
             
             <!-- Food Availability -->
@@ -578,7 +740,7 @@
 
         // Countdown
         function updateCountdown() {
-            const eventDate = new Date("2026-04-25T00:00:00+09:00"); // JST
+            const eventDate = new Date("2026-04-18T00:00:00+09:00"); // JST
             const now = new Date();
             const timeLeft = eventDate - now;
 
