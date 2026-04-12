@@ -4,787 +4,1600 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bush Bash Japan</title>
-    <link rel="icon" href="/bbjapan/public/favicon.ico" type="image/x-icon">
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+JP:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="public/favicon.ico" type="image/x-icon">
     <style>
+        :root {
+            color-scheme: light;
+            --bg: #f4f6ef;
+            --surface: #fcfdf8;
+            --surface-strong: #ffffff;
+            --surface-muted: #edf2e5;
+            --line: #d8dfcf;
+            --text: #233127;
+            --muted: #58685b;
+            --green: #275740;
+            --green-deep: #163826;
+            --accent: #c94f35;
+            --accent-soft: #f0d2c9;
+            --sun: #e5c45b;
+            --radius: 8px;
+            --shadow: 0 18px 40px rgba(22, 56, 38, 0.08);
+            --max: 1120px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
         html {
             scroll-behavior: smooth;
         }
+
         body {
-            background: linear-gradient(to bottom, #f9fafb, #e5e7eb);
-            font-family: 'Inter', sans-serif;
-            color: #1f2937;
+            margin: 0;
+            font-family: Inter, "Noto Sans", "Noto Sans JP", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: var(--bg);
+            color: var(--text);
             line-height: 1.6;
+            letter-spacing: 0;
         }
+
         .jp {
-            font-family: 'Noto Sans JP', sans-serif;
+            font-family: "Hiragino Sans", "Yu Gothic", "Noto Sans JP", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
             word-break: keep-all;
             overflow-wrap: normal;
         }
-        .nav-menu a, .nav-menu button {
-            white-space: nowrap;
+
+        a {
+            color: inherit;
         }
-        .nav-bar h1 {
-            white-space: nowrap;
+
+        button,
+        input,
+        textarea {
+            font: inherit;
+            letter-spacing: 0;
         }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .site {
+            min-height: 100vh;
+        }
+
         .nav-bar {
             position: sticky;
             top: 0;
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(8px);
-            z-index: 10;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            z-index: 20;
+            border-bottom: 1px solid rgba(216, 223, 207, 0.9);
+            background: rgba(252, 253, 248, 0.9);
+            backdrop-filter: blur(12px);
         }
-        .section-card {
-            background: white;
-            border-radius: 16px;
-            padding: 28px;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
-            margin-bottom: 24px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border-left: 4px solid #ea580c;
-        }
-        .section-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
-        }
-        .intro-card {
-            border-left: 4px solid #ea580c;
-        }
-        .hero {
-            height: 70vh;
-            max-height: 600px;
-            background: url('/public/images/bbhero.jpg') center/cover no-repeat;
+
+        .nav-inner {
+            max-width: var(--max);
+            margin: 0 auto;
+            padding: 16px 24px;
             display: flex;
-            justify-content: center;
             align-items: center;
-            text-align: center;
-            color: white;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .brand {
+            font-size: 1rem;
+            font-weight: 700;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        .nav-links a:hover {
+            color: var(--green);
+        }
+
+        .lang-switch {
+            display: inline-flex;
+            align-items: center;
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.7);
+        }
+
+        .lang-button {
+            border: 0;
+            background: transparent;
+            color: var(--muted);
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+
+        .lang-button.is-active {
+            background: var(--green);
+            color: #fff;
+        }
+
+        .menu-button {
+            display: none;
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: var(--surface-strong);
+            color: var(--text);
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+
+        .hero {
             position: relative;
+            min-height: 72vh;
+            max-height: 780px;
+            display: flex;
+            align-items: flex-end;
+            background:
+                linear-gradient(180deg, rgba(16, 32, 23, 0.2) 0%, rgba(16, 32, 23, 0.72) 100%),
+                url("public/images/bbhero.jpg") center / cover no-repeat;
+            color: #fff;
         }
-        .hero::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.5);
+
+        .hero-inner {
+            max-width: var(--max);
+            width: 100%;
+            margin: 0 auto;
+            padding: 96px 24px 56px;
         }
-        .hero-content {
-            position: relative;
-            z-index: 1;
-            animation: fadeIn 1.5s ease-in-out;
+
+        .hero-kicker {
+            margin: 0 0 12px;
+            color: rgba(255, 255, 255, 0.88);
+            font-size: 0.95rem;
+            font-weight: 600;
         }
-        .cta-button {
-            background-color: #ea580c;
-            color: white;
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-size: 1.125rem;
+
+        .hero h1 {
+            margin: 0;
+            max-width: 760px;
+            font-size: 4.25rem;
+            line-height: 1;
+        }
+
+        .hero-copy {
+            max-width: 640px;
+            margin: 18px 0 0;
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.92);
+        }
+
+        .countdown {
+            margin-top: 16px;
+            color: var(--sun);
+            font-weight: 600;
+        }
+
+        .hero-facts {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 12px;
+            margin-top: 28px;
+        }
+
+        .fact-chip {
+            padding: 12px 14px;
+            border: 1px solid rgba(255, 255, 255, 0.24);
+            border-radius: var(--radius);
+            background: rgba(252, 253, 248, 0.12);
+            backdrop-filter: blur(6px);
+        }
+
+        .fact-chip span {
+            display: block;
+            font-size: 0.82rem;
+            color: rgba(255, 255, 255, 0.78);
+        }
+
+        .fact-chip strong {
+            display: block;
+            margin-top: 4px;
+            font-size: 1rem;
+            color: #fff;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 26px;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 46px;
+            padding: 0 18px;
+            border-radius: var(--radius);
+            border: 1px solid transparent;
             font-weight: 600;
             text-decoration: none;
-            transition: background-color 0.3s ease, transform 0.2s ease;
         }
-        .cta-button:hover {
-            background-color: #c2410c;
-            transform: scale(1.05);
+
+        .button-primary {
+            background: var(--green);
+            color: #fff;
         }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+
+        .button-primary:hover {
+            background: var(--green-deep);
         }
-        .submit-button {
-            background-color: #ea580c;
-            color: white;
-            padding: 14px;
-            border-radius: 8px;
-            width: 100%;
-            font-size: 1.125rem;
-            font-weight: 600;
-            text-align: center;
-            transition: background-color 0.3s ease, transform 0.2s ease;
+
+        .button-secondary {
+            background: rgba(252, 253, 248, 0.14);
+            color: #fff;
+            border-color: rgba(255, 255, 255, 0.28);
         }
-        .submit-button:hover {
-            background-color: #c2410c;
-            transform: scale(1.02);
+
+        .button-secondary:hover {
+            background: rgba(252, 253, 248, 0.2);
         }
-        .schedule-day {
-            border-bottom: 1px solid #e5e7eb;
-            padding-bottom: 12px;
-            margin-bottom: 12px;
+
+        .page-shell {
+            padding-bottom: 48px;
         }
-        .schedule-day:last-child {
-            border-bottom: none;
-            padding-bottom: 0;
-            margin-bottom: 0;
+
+        .section-band {
+            padding: 56px 24px;
         }
-        .countdown {
+
+        .section-band + .section-band {
+            border-top: 1px solid var(--line);
+        }
+
+        .section-band.surface {
+            background: var(--surface);
+        }
+
+        .section-band.surface-strong {
+            background: var(--surface-strong);
+        }
+
+        .section-inner {
+            max-width: var(--max);
+            margin: 0 auto;
+        }
+
+        .section-header {
+            display: grid;
+            grid-template-columns: minmax(0, 1.2fr) minmax(260px, 0.8fr);
+            gap: 20px;
+            align-items: end;
+            margin-bottom: 32px;
+        }
+
+        .section-title {
+            margin: 0;
+            font-size: 2.3rem;
+            line-height: 1.1;
+        }
+
+        .section-intro {
+            margin: 8px 0 0;
+            max-width: 720px;
+            color: var(--muted);
+        }
+
+        .section-side {
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        .overview-grid,
+        .contact-grid,
+        .travel-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+            gap: 28px;
+        }
+
+        .overview-copy p,
+        .detail-stack p {
+            margin: 0;
+            color: var(--muted);
+        }
+
+        .overview-points {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .point {
+            padding-top: 12px;
+            border-top: 2px solid var(--line);
+        }
+
+        .point strong {
+            display: block;
             font-size: 1rem;
-            margin-top: 10px;
-            color: #ffffff;
+            margin-bottom: 6px;
         }
-        footer {
-            background: #1f2937;
-            color: white;
-            padding: 20px 0;
-            text-align: center;
+
+        .point p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 0.95rem;
         }
-        .hamburger {
-            display: none;
-            transition: transform 0.3s ease;
+
+        .detail-stack {
+            display: grid;
+            gap: 16px;
+            padding: 20px;
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: var(--surface-strong);
+            box-shadow: var(--shadow);
         }
-        .hamburger.active {
-            transform: rotate(90deg);
-        }
-        .nav-menu {
-            transition: all 0.3s ease-in-out;
-            transform-origin: top;
-        }
-        .nav-menu.active {
-            animation: slideDown 0.3s ease-out;
-        }
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        .archive-header {
-            cursor: pointer;
-            user-select: none;
+
+        .detail-row {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            gap: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--line);
         }
-        .archive-header::after {
-            content: "▼";
-            font-size: 0.75rem;
-            transition: transform 0.3s ease;
-            color: #6b7280;
-        }
-        .archive-header.collapsed::after {
-            transform: rotate(-90deg);
-        }
-        .archive-content {
-            max-height: 2000px;
-            overflow: hidden;
-            transition: max-height 0.5s ease-out, opacity 0.3s ease, padding 0.5s ease-out;
-            opacity: 1;
-        }
-        .archive-content.collapsed {
-            max-height: 0;
-            opacity: 0;
-            margin-top: 0;
-            padding-top: 0;
+
+        .detail-row:last-child {
             padding-bottom: 0;
+            border-bottom: 0;
         }
-        .back-to-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            background-color: #ea580c;
-            color: white;
-            border-radius: 50%;
+
+        .detail-label {
+            color: var(--muted);
+            font-size: 0.92rem;
+        }
+
+        .detail-value {
+            text-align: right;
+            font-weight: 600;
+        }
+
+        .action-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .timeline-layout {
+            display: grid;
+            gap: 26px;
+        }
+
+        .day-block {
+            padding-top: 18px;
+            border-top: 2px solid var(--line);
+        }
+
+        .day-head {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 18px;
+        }
+
+        .day-head h3 {
+            margin: 0;
+            font-size: 1.4rem;
+        }
+
+        .day-head p {
+            margin: 4px 0 0;
+            color: var(--muted);
+        }
+
+        .timeline {
+            display: grid;
+            gap: 10px;
+        }
+
+        .timeline-entry {
+            display: grid;
+            grid-template-columns: 180px minmax(0, 1fr);
+            gap: 16px;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .timeline-entry:last-child {
+            border-bottom: 0;
+        }
+
+        .timeline-time {
+            color: var(--green);
+            font-weight: 700;
+        }
+
+        .timeline-copy strong {
+            display: block;
+            margin-bottom: 4px;
+            font-size: 1rem;
+        }
+
+        .timeline-copy p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        .tag-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 12px;
+            border-radius: var(--radius);
+            background: var(--surface-muted);
+            color: var(--text);
+            font-size: 0.92rem;
+        }
+
+        .tag.featured {
+            background: var(--accent-soft);
+            color: #732d1d;
+            font-weight: 600;
+        }
+
+        .travel-grid {
+            align-items: start;
+        }
+
+        .map-frame {
+            overflow: hidden;
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: var(--surface-strong);
+        }
+
+        .map-frame iframe {
+            display: block;
+            width: 100%;
+            min-height: 360px;
+            border: 0;
+        }
+
+        .travel-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .travel-item {
+            display: grid;
+            gap: 4px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .travel-item:last-child {
+            padding-bottom: 0;
+            border-bottom: 0;
+        }
+
+        .travel-item span {
+            color: var(--muted);
+            font-size: 0.92rem;
+        }
+
+        .travel-item strong {
+            font-size: 1rem;
+        }
+
+        .food-note {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--line);
+            color: var(--muted);
+        }
+
+        .contact-copy {
+            display: grid;
+            gap: 16px;
+        }
+
+        .contact-copy p {
+            margin: 0;
+            color: var(--muted);
+        }
+
+        .contact-list {
+            display: grid;
+            gap: 10px;
+        }
+
+        .contact-list div {
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .contact-list div:last-child {
+            padding-bottom: 0;
+            border-bottom: 0;
+        }
+
+        .form-panel {
+            display: grid;
+            gap: 12px;
+            padding: 22px;
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: var(--surface-strong);
+            box-shadow: var(--shadow);
+        }
+
+        .form-panel input,
+        .form-panel textarea {
+            width: 100%;
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            padding: 12px 14px;
+            background: #fff;
+            color: var(--text);
+        }
+
+        .form-panel textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .form-panel input:focus,
+        .form-panel textarea:focus {
+            outline: 2px solid rgba(39, 87, 64, 0.18);
+            border-color: var(--green);
+        }
+
+        .archive-band {
+            padding-top: 28px;
+        }
+
+        .archive-toggle {
+            width: 100%;
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: space-between;
+            gap: 16px;
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: var(--surface);
+            color: var(--text);
+            padding: 18px 20px;
+            cursor: pointer;
+        }
+
+        .archive-toggle span {
+            color: var(--muted);
+            font-size: 0.92rem;
+        }
+
+        .archive-toggle strong {
+            font-size: 1.2rem;
+        }
+
+        .archive-toggle::after {
+            content: "▼";
+            color: var(--muted);
+            font-size: 0.78rem;
+            transition: transform 0.2s ease;
+        }
+
+        .archive-toggle[aria-expanded="true"]::after {
+            transform: rotate(180deg);
+        }
+
+        .archive-content {
+            display: none;
+            margin-top: 18px;
+            padding-top: 22px;
+            border-top: 1px solid var(--line);
+        }
+
+        .archive-content.is-open {
+            display: block;
+        }
+
+        .archive-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+        .archive-column h4 {
+            margin: 0 0 10px;
+            font-size: 1.05rem;
+        }
+
+        .archive-column p,
+        .archive-column li {
+            color: var(--muted);
+        }
+
+        .archive-column ul {
+            margin: 0;
+            padding-left: 18px;
+        }
+
+        footer {
+            padding: 24px;
+            border-top: 1px solid var(--line);
+            color: var(--muted);
+            text-align: center;
+            background: var(--surface);
+        }
+
+        .back-to-top {
+            position: fixed;
+            right: 24px;
+            bottom: 24px;
+            width: 46px;
+            height: 46px;
+            border: 0;
+            border-radius: 999px;
+            background: var(--green);
+            color: #fff;
             cursor: pointer;
             opacity: 0;
             visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
-            z-index: 100;
-            box-shadow: 0 4px 12px rgba(234, 88, 12, 0.3);
-            font-size: 1.5rem;
+            box-shadow: 0 10px 24px rgba(22, 56, 38, 0.18);
+            transition: opacity 0.2s ease, visibility 0.2s ease;
         }
+
         .back-to-top.visible {
             opacity: 1;
             visibility: visible;
         }
-        .back-to-top:hover {
-            background-color: #c2410c;
-            transform: translateY(-5px);
-            box-shadow: 0 6px 16px rgba(234, 88, 12, 0.4);
-        }
-        .archive-card {
-            border-left: 2px dashed #d1d5db !important;
-        }
-        .highlight-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            background: linear-gradient(135deg, #ea580c 0%, #f97316 100%);
-            color: white;
-            font-size: 0.7rem;
-            font-weight: 700;
-            padding: 2px 8px;
-            border-radius: 9999px;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.8; }
-        }
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 12px;
-            margin-top: 16px;
-        }
-        .feature-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 16px 12px;
-            background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
-            border-radius: 12px;
-            text-align: center;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-        .feature-item:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 12px rgba(234, 88, 12, 0.15);
-        }
-        .feature-icon {
-            font-size: 2rem;
-            margin-bottom: 8px;
-        }
-        .feature-text {
-            font-weight: 600;
-            color: #9a3412;
-            font-size: 0.875rem;
-        }
-        .info-banner {
-            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-            border-left: 4px solid #f59e0b;
-            padding: 16px 20px;
-            border-radius: 0 12px 12px 0;
-            margin: 20px 0;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .info-banner-icon {
-            font-size: 1.5rem;
-        }
-        .venue-highlights {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 12px;
-        }
-        .venue-tag {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: #f3f4f6;
-            padding: 6px 12px;
-            border-radius: 8px;
-            font-size: 0.875rem;
-            color: #374151;
-        }
-        @media (max-width: 768px) {
+
+        @media (max-width: 900px) {
             .hero {
-                height: 50vh;
-                max-height: 400px;
+                min-height: 64vh;
             }
-            .hero-content h1 {
-                font-size: 2.75rem;
+
+            .hero h1 {
+                font-size: 3.2rem;
             }
-            .hero-content p {
-                font-size: 1.25rem;
+
+            .hero-facts,
+            .overview-points,
+            .section-header,
+            .overview-grid,
+            .travel-grid,
+            .contact-grid,
+            .archive-grid {
+                grid-template-columns: 1fr;
             }
-            .section-card {
-                padding: 20px;
+
+            .timeline-entry {
+                grid-template-columns: 1fr;
+                gap: 8px;
             }
-            .nav-bar {
-                padding: 10px 0;
+
+            .detail-row {
+                flex-direction: column;
             }
-            .hamburger {
-                display: block;
-                cursor: pointer;
-                font-size: 1.5rem;
+
+            .detail-value {
+                text-align: left;
             }
-            .nav-menu {
+        }
+
+        @media (max-width: 760px) {
+            .nav-inner {
+                padding: 14px 18px;
+            }
+
+            .menu-button {
+                display: inline-flex;
+            }
+
+            .nav-links {
                 display: none;
                 position: absolute;
-                top: 100%;
+                top: calc(100% + 1px);
                 left: 0;
                 right: 0;
-                background: rgba(255, 255, 255, 0.95);
+                padding: 16px 18px 20px;
+                border-bottom: 1px solid var(--line);
+                background: rgba(252, 253, 248, 0.98);
                 flex-direction: column;
-                padding: 1rem;
-                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                align-items: stretch;
+                gap: 12px;
             }
-            .nav-menu.active {
+
+            .nav-links.is-open {
                 display: flex;
             }
-            .nav-menu a, .nav-menu button {
-                margin: 0.5rem 0;
+
+            .nav-controls {
+                gap: 10px;
+            }
+
+            .lang-switch {
+                width: 100%;
+            }
+
+            .lang-button {
+                flex: 1 1 0;
+            }
+
+            .hero-inner {
+                padding: 86px 18px 40px;
+            }
+
+            .hero h1 {
+                font-size: 2.55rem;
+            }
+
+            .hero-copy {
+                font-size: 1rem;
+            }
+
+            .section-band {
+                padding: 40px 18px;
             }
         }
     </style>
 </head>
 <body>
-
-    <!-- English Content -->
-    <div id="content-en">
-        <!-- Navigation Bar -->
-        <nav class="nav-bar py-4 px-6">
-            <div class="max-w-4xl mx-auto flex justify-between items-center">
-                <h1 class="text-xl font-bold text-gray-800">Bush Bash Japan</h1>
-                <div class="hamburger md:hidden">☰</div>
-                <div class="nav-menu md:flex md:space-x-6 items-center">
-                    <a href="#intro" class="text-gray-600 hover:text-orange-600">Intro</a>
-                    <a href="#schedule" class="text-gray-600 hover:text-orange-600">Schedule</a>
-                    <a href="#availability" class="text-gray-600 hover:text-orange-600">Availability</a>
-                    <a href="#location" class="text-gray-600 hover:text-orange-600">Location</a>
-                    <a href="#contact" class="text-gray-600 hover:text-orange-600">Contact</a>
-                    <a href="#archive" class="text-gray-600 hover:text-orange-600">2025</a>
-                    <button id="toggle-en" class="text-gray-600 hover:text-orange-600 hidden md:inline">English</button>
-                    <button id="toggle-jp" class="text-gray-600 hover:text-orange-600">日本語</button>
+    <div id="content-en" class="site">
+        <nav class="nav-bar">
+            <div class="nav-inner">
+                <a class="brand" href="#top">Bush Bash Japan</a>
+                <div class="nav-controls">
+                    <button class="menu-button" type="button" data-menu-toggle aria-label="Open navigation">Menu</button>
+                    <div class="nav-links" data-nav-links>
+                        <a href="#intro">Overview</a>
+                        <a href="#schedule">Schedule</a>
+                        <a href="#availability">Stay</a>
+                        <a href="#location">Location</a>
+                        <a href="#contact">Contact</a>
+                        <a href="#archive">2025</a>
+                        <div class="lang-switch">
+                            <button class="lang-button is-active" type="button" data-lang-target="en">English</button>
+                            <button class="lang-button" type="button" data-lang-target="jp">日本語</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </nav>
 
-        <!-- Hero Section -->
-        <div class="hero">
-            <div class="hero-content">
-                <h1 class="text-6xl md:text-4xl font-bold">Bush Bash Japan</h1>
-                <p class="text-2xl md:text-lg mt-3">18 - 19 April 2026</p>
+        <section class="hero" id="top">
+            <div class="hero-inner">
+                <p class="hero-kicker">18 - 19 April 2026 • Lodge Kiyokawa • Bungo-Ono, Oita</p>
+                <h1>Bush Bash Japan</h1>
+                <p class="hero-copy">A Bitcoin weekend in the countryside with presentations, slow meals, a late sauna session, and a full Sunday of optional activities.</p>
                 <div id="countdown-en" class="countdown"></div>
-                <a href="#contact" class="cta-button mt-6 inline-block">Reserve Now</a>
+                <div class="hero-facts">
+                    <div class="fact-chip">
+                        <span>Saturday</span>
+                        <strong>Presentations from 10:00 AM</strong>
+                    </div>
+                    <div class="fact-chip">
+                        <span>Sunday</span>
+                        <strong>Optional activities until 4:00 PM</strong>
+                    </div>
+                    <div class="fact-chip">
+                        <span>Stay</span>
+                        <strong>Contact lodge directly for availability</strong>
+                    </div>
+                    <div class="fact-chip">
+                        <span>Navigation</span>
+                        <strong>Map code 237-167-204*62</strong>
+                    </div>
+                </div>
+                <div class="hero-actions">
+                    <a class="button button-primary" href="#contact">Reserve a Spot</a>
+                    <a class="button button-secondary" href="https://maps.google.com/?q=Lodge%20Kiyokawa%2C%20158%20Kiyokawamachi%20Utaeda%2C%20Bungoono%2C%20Oita%20879-6911%2C%20Japan" target="_blank" rel="noreferrer">Open Map</a>
+                    <a class="button button-secondary" href="tel:+81974353601">Call Lodge</a>
+                </div>
             </div>
-        </div>
+        </section>
 
-        <div class="max-w-4xl mx-auto py-16 px-6">
-            <!-- Intro Section -->
-            <section id="intro" class="section-card intro-card">
-                <h2 class="text-3xl font-semibold mb-4">Bush Bash Japan 🇯🇵</h2>
-                <p>Join us for the second Bush Bash Japan, inspired by Bush Bash Australia. This informal weekend brings Bitcoiners together in the Japanese countryside—no event cost, no KYC, just great discussions and experiences. As more participants confirm their attendance, the schedule and activities will be updated.</p>
-            </section>
+        <main class="page-shell">
+            <section id="intro" class="section-band surface">
+                <div class="section-inner">
+                    <div class="section-header">
+                        <div>
+                            <h2 class="section-title">Weekend at a glance</h2>
+                            <p class="section-intro">Bush Bash Japan brings Bitcoiners together without ticketing or ceremony. The useful details are simple: arrive Saturday morning, settle in at Lodge Kiyokawa, stay late for the evening session, and keep Sunday open if you want the full trip.</p>
+                        </div>
+                        <div class="section-side">The current plan is stable enough to book around. If you need room inventory or extra nights, contact the lodge directly.</div>
+                    </div>
 
-            <!-- Event Schedule -->
-            <section id="schedule" class="section-card">
-                <h2 class="text-3xl font-semibold mb-4">📅 Event Schedule</h2>
-                <div class="space-y-4">
-                    <div class="schedule-day">
-                        <p class="flex items-center gap-2"><span class="text-2xl">🌙</span><span class="font-bold">Friday, April 17:</span> Informal Meet & Greet (Evening)</p>
-                    </div>
-                    <div class="schedule-day">
-                        <p class="flex items-center gap-2 mb-3"><span class="text-2xl">☀️</span><span class="font-bold">Saturday, April 18:</span> Main Event Day</p>
-                        <ul class="ml-8 space-y-2 text-gray-700">
-                            <li class="flex items-center gap-2"><span>☕</span><span class="font-semibold">9:00 - 10:00 AM:</span> Check-in & Coffee</li>
-                            <li class="flex items-center gap-2"><span>👋</span><span class="font-semibold">10:00 AM - 12:00 PM:</span> Welcome & Introductions</li>
-                            <li class="flex items-center gap-2"><span>🍱</span><span class="font-semibold">12:00 - 2:00 PM:</span> Lunch & Free Time</li>
-                            <li class="flex items-center gap-2"><span>🎤</span><span class="font-semibold">2:00 - 4:00 PM:</span> Presentations & Discussions</li>
-                            <li class="flex items-center gap-2"><span>🌾</span><span class="font-semibold">4:00 - 6:00 PM:</span> Farm Visit <span class="highlight-badge">New!</span></li>
-                            <li class="flex items-center gap-2"><span>🔥</span><span class="font-semibold">6:00 PM - Late:</span> Sauna, Bonfire, Dinner, Drinks & More</li>
-                        </ul>
-                    </div>
-                    <div class="schedule-day">
-                        <p class="flex items-center gap-2 mb-3"><span class="text-2xl">🌅</span><span class="font-bold">Sunday, April 19:</span></p>
-                        <ul class="ml-8 space-y-2 text-gray-700">
-                            <li class="flex items-center gap-2"><span>🍳</span><span class="font-semibold">7:30 - 9:00 AM:</span> Breakfast & Pack-up</li>
-                            <li class="flex items-center gap-2"><span>🏠</span><span class="font-semibold">10:00 AM:</span> Lodge Checkout</li>
-                            <li class="flex items-center gap-2"><span>🎯</span><span class="font-semibold">10:30 AM - 4:00 PM:</span> Optional Activities</li>
-                        </ul>
-                        <div class="ml-12 mt-2 flex flex-wrap gap-3">
-                            <span class="inline-flex items-center gap-1 bg-orange-50 text-orange-700 px-3 py-1 rounded-full text-sm">🚣 River Rafting</span>
-                            <span class="inline-flex items-center gap-1 bg-orange-50 text-orange-700 px-3 py-1 rounded-full text-sm">🎣 Bamboo Fishing</span>
-                            <span class="inline-flex items-center gap-1 bg-orange-50 text-orange-700 px-3 py-1 rounded-full text-sm">🚲 Bicycle Rental</span>
+                    <div class="overview-grid">
+                        <div class="overview-copy">
+                            <div class="overview-points">
+                                <div class="point">
+                                    <strong>No event fee</strong>
+                                    <p>Come for the talks, the countryside, and the people.</p>
+                                </div>
+                                <div class="point">
+                                    <strong>Main day on Saturday</strong>
+                                    <p>Presentations run from 10:00 AM through 5:00 PM.</p>
+                                </div>
+                                <div class="point">
+                                    <strong>Sunday stays useful</strong>
+                                    <p>Checkout is at 10:00 AM, followed by optional activities until 4:00 PM.</p>
+                                </div>
+                                <div class="point">
+                                    <strong>New farm visit</strong>
+                                    <p>The Sunday activity list now includes a 10:30 AM to 12:00 PM farm visit.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="availability" class="detail-stack">
+                            <div class="detail-row">
+                                <div>
+                                    <div class="detail-label">Availability</div>
+                                    <div class="detail-value">Contact Lodge Kiyokawa directly</div>
+                                </div>
+                            </div>
+                            <div class="detail-row">
+                                <div>
+                                    <div class="detail-label">Phone</div>
+                                    <div class="detail-value"><a href="tel:+81974353601">0974-35-3601</a></div>
+                                </div>
+                            </div>
+                            <div class="detail-row">
+                                <div>
+                                    <div class="detail-label">Extra nights</div>
+                                    <div class="detail-value">Friday and Sunday should also go through the lodge</div>
+                                </div>
+                            </div>
+                            <div class="action-row">
+                                <a class="button button-primary" href="tel:+81974353601">Call Lodge</a>
+                                <a class="button button-primary" href="https://lodge-kiyokawa.jp/" target="_blank" rel="noreferrer">Lodge Website</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
-            
-            <!-- Current Availability -->
-            <section id="availability" class="section-card">
-                <h2 class="text-3xl font-semibold mb-4">🛏️ Current Availability</h2>
-                <p>Availability for Saturday evening at <a href="https://lodge-kiyokawa.jp/" target="_blank" class="font-bold text-orange-600 hover:underline">Lodge Kiyokawa</a></p>
-                <div class="feature-grid">
-                    <div class="feature-item">
-                        <span class="feature-icon">🏡</span>
-                        <span class="feature-text">6 Tree Houses</span>
-                        <span class="text-xs text-gray-500 mt-1">up to 2 people each</span>
-                    </div>
-                    <div class="feature-item">
-                        <span class="feature-icon">🛏️</span>
-                        <span class="feature-text">8 Male Dorm</span>
-                        <span class="text-xs text-gray-500 mt-1">dormitory spots</span>
-                    </div>
-                    <div class="feature-item">
-                        <span class="feature-icon">🛏️</span>
-                        <span class="feature-text">8 Female Dorm</span>
-                        <span class="text-xs text-gray-500 mt-1">dormitory spots</span>
-                    </div>
-                </div>
-                <div class="info-banner">
-                    <span class="info-banner-icon">💡</span>
-                    <p class="text-sm text-amber-800">Enquire about Friday or Sunday availability in the contact form below.</p>
-                </div>
-            </section>
-            
-            <!-- Location -->
-            <section id="location" class="section-card">
-                <h2 class="text-3xl font-semibold mb-4">📍 Location</h2>
-                <p>Bush Bash Japan will take place at <a href="https://lodge-kiyokawa.jp/" target="_blank" class="font-bold text-orange-600 hover:underline">Lodge Kiyokawa</a> in <span class="font-bold">Bungo-Ōno, Oita, Japan</span>.</p>
-                <div class="venue-highlights">
-                    <span class="venue-tag">🌲 Nature Retreat</span>
-                    <span class="venue-tag">🧖 Sauna</span>
-                    <span class="venue-tag">🔥 Bonfire Area</span>
-                    <span class="venue-tag">🏔️ Mountain Views</span>
-                    <span class="venue-tag">🚗 Free Parking</span>
-                </div>
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3355.996760732131!2d131.57039321520954!3d32.86736398101367!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3546b7e7c7e7c7e7%3A0x8e8f8c8e8f8c8e8f!2s158%20Kiyokawamachi%20Utaeda%2C%20Bungoono%2C%20Oita%20879-6911%2C%20Japan!5e0!3m2!1sen!2sjp!4v1677654321987!5m2!1sen!2sjp" width="100%" height="300" style="border:0; margin-top: 16px; border-radius: 12px;" allowfullscreen loading="lazy"></iframe>
-            </section>
-            
-            <!-- Food Availability -->
-            <section class="section-card">
-                <h2 class="text-3xl font-semibold mb-4">🍽️ Food Availability</h2>
-                <p>Food will be available for purchase at Lodge Kiyokawa. There are also a few nearby restaurants and a Michi no Eki.</p>
-            </section>
 
-            <!-- Contact Form -->
-            <section id="contact" class="section-card">
-                <h2 class="text-3xl font-semibold mb-4">Reserve Your Spot / Contact Us</h2>
-                <form name="contact" method="POST" data-netlify="true" class="mt-6 space-y-4">
-                    <input type="hidden" name="form-name" value="contact">
-                    <input type="text" name="name" placeholder="Your Name / Nym" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent" required>
-                    <input type="email" name="email" placeholder="Your Email" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent" required>
-                    <textarea name="message" placeholder="Your Message (English or 日本語)" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent h-32"></textarea>
-                    <button type="submit" class="submit-button">Send Message</button>
-                </form>
-            </section>
-        </div>
-
-        <!-- 2025 Archive Section -->
-        <section id="archive" class="max-w-4xl mx-auto py-16 px-6">
-            <div class="section-card archive-card" style="background: #f9fafb;">
-                <div class="archive-header collapsed" id="archive-header-en">
-                    <h2 class="text-3xl font-semibold text-gray-600">📚 2025 Archive</h2>
-                </div>
-                <div class="archive-content collapsed" id="archive-content-en">
-                    <p class="text-gray-600 mb-6 mt-4">Information from the inaugural Bush Bash Japan event.</p>
-                    
-                    <div class="space-y-6">
+            <section id="schedule" class="section-band surface-strong">
+                <div class="section-inner">
+                    <div class="section-header">
                         <div>
-                            <h3 class="text-xl font-semibold mb-2">Event Dates</h3>
-                            <p class="text-gray-700">12 - 13 April 2025</p>
+                            <h2 class="section-title">Schedule</h2>
+                            <p class="section-intro">Saturday is the main program. Sunday stays lighter, with breakfast, checkout, and optional activities for anyone extending the trip.</p>
                         </div>
-                        
+                        <div class="section-side">The Sunday optional block keeps all three existing activities and adds the farm visit.</div>
+                    </div>
+
+                    <div class="timeline-layout">
+                        <div class="day-block">
+                            <div class="day-head">
+                                <div>
+                                    <h3>Friday, April 17</h3>
+                                    <p>Informal arrival</p>
+                                </div>
+                                <div class="section-side">Evening</div>
+                            </div>
+                            <div class="timeline">
+                                <div class="timeline-entry">
+                                    <div class="timeline-time">Evening</div>
+                                    <div class="timeline-copy">
+                                        <strong>Informal meet and greet</strong>
+                                        <p>Low-key arrivals and conversation before the main day starts.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="day-block">
+                            <div class="day-head">
+                                <div>
+                                    <h3>Saturday, April 18</h3>
+                                    <p>Main event day</p>
+                                </div>
+                                <div class="section-side">Talks, lunch break, evening session</div>
+                            </div>
+                            <div class="timeline">
+                                <div class="timeline-entry">
+                                    <div class="timeline-time">9:00 AM - 10:00 AM</div>
+                                    <div class="timeline-copy">
+                                        <strong>Check-in &amp; Coffee</strong>
+                                        <p>Get settled before the first session begins.</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-entry">
+                                    <div class="timeline-time">10:00 AM - 12:00 PM</div>
+                                    <div class="timeline-copy">
+                                        <strong>Introduction &amp; Presentations</strong>
+                                        <p>The room opens with introductions and the first presentation block.</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-entry">
+                                    <div class="timeline-time">12:00 PM - 2:00 PM</div>
+                                    <div class="timeline-copy">
+                                        <strong>Lunch &amp; Free Time</strong>
+                                        <p>Take a longer pause before the afternoon discussions.</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-entry">
+                                    <div class="timeline-time">2:00 PM - 5:00 PM</div>
+                                    <div class="timeline-copy">
+                                        <strong>Presentations &amp; Discussions</strong>
+                                        <p>The main afternoon block continues through late afternoon.</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-entry">
+                                    <div class="timeline-time">5:00 PM - Late</div>
+                                    <div class="timeline-copy">
+                                        <strong>Sauna, Bonfire, Dinner, Drinks, and More</strong>
+                                        <p>The schedule loosens up after the talks wrap.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="day-block">
+                            <div class="day-head">
+                                <div>
+                                    <h3>Sunday, April 19</h3>
+                                    <p>Breakfast, checkout, and optional activities</p>
+                                </div>
+                                <div class="section-side">Keep the whole day open if you want the full Sunday</div>
+                            </div>
+                            <div class="timeline">
+                                <div class="timeline-entry">
+                                    <div class="timeline-time">7:30 AM - 10:00 AM</div>
+                                    <div class="timeline-copy">
+                                        <strong>Breakfast &amp; Pack-up</strong>
+                                        <p>Take it slow before checkout.</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-entry">
+                                    <div class="timeline-time">10:00 AM</div>
+                                    <div class="timeline-copy">
+                                        <strong>Lodge Checkout</strong>
+                                        <p>Rooms clear at the lodge before the activity window begins.</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-entry">
+                                    <div class="timeline-time">10:30 AM - 4:00 PM</div>
+                                    <div class="timeline-copy">
+                                        <strong>Optional Activities</strong>
+                                        <p>Three existing options stay on the plan, with the farm visit added to the day.</p>
+                                        <div class="tag-row">
+                                            <span class="tag">🚣 River Rafting</span>
+                                            <span class="tag">🎣 Bamboo Fishing</span>
+                                            <span class="tag">🚲 Bicycle Rental</span>
+                                            <span class="tag featured">🌾 Farm Visit • 10:30 AM - 12:00 PM</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="location" class="section-band surface">
+                <div class="section-inner">
+                    <div class="section-header">
                         <div>
-                            <h3 class="text-xl font-semibold mb-2">Event Schedule</h3>
-                            <div class="space-y-2 text-gray-700">
-                                <p><span class="font-bold">Friday, April 11:</span> Informal Meet & Greet (Evening)</p>
-                                <p><span class="font-bold">Saturday, April 12:</span> Main Event Day</p>
-                                <ul class="ml-6 list-disc space-y-1">
-                                    <li><span class="font-bold">9:00 AM - 10:00 AM:</span> Check-in & Coffee</li>
-                                    <li><span class="font-bold">10:00 AM - 12:00 PM:</span> Introduction & Presentations</li>
-                                    <li><span class="font-bold">12:00 PM - 2:00 PM:</span> Lunch & Free Time</li>
-                                    <li><span class="font-bold">2:00 PM - 5:00 PM:</span> Presentations & Discussions</li>
-                                    <li><span class="font-bold">5:00 PM - Late:</span> Sauna, Bonfire, Dinner, Drinks, and More</li>
+                            <h2 class="section-title">Travel and lodge details</h2>
+                            <p class="section-intro">Use the map link or the official map code when driving. The lodge warns that address or phone searches can route to the wrong place.</p>
+                        </div>
+                        <div class="section-side">The venue is Lodge Kiyokawa in Kiyokawamachi Utaeda, Bungo-Ono, Oita.</div>
+                    </div>
+
+                    <div class="travel-grid">
+                        <div class="map-frame">
+                            <iframe src="https://maps.google.com/maps?q=Lodge%20Kiyokawa%2C%20158%20Kiyokawamachi%20Utaeda%2C%20Bungoono%2C%20Oita%20879-6911%2C%20Japan&amp;z=16&amp;output=embed" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+
+                        <div class="detail-stack">
+                            <div class="travel-list">
+                                <div class="travel-item">
+                                    <span>Address</span>
+                                    <strong>158 Kiyokawamachi Utaeda, Bungo-Ono, Oita 879-6911, Japan</strong>
+                                </div>
+                                <div class="travel-item">
+                                    <span>Phone</span>
+                                    <strong><a href="tel:+81974353601">0974-35-3601</a></strong>
+                                </div>
+                                <div class="travel-item">
+                                    <span>Map code</span>
+                                    <strong>237-167-204*62</strong>
+                                </div>
+                                <div class="travel-item">
+                                    <span>Driving from Oita</span>
+                                    <strong>About 50 minutes from Oita Mera IC</strong>
+                                </div>
+                                <div class="travel-item">
+                                    <span>Rail access</span>
+                                    <strong>2.3 km from Bungo-Kiyokawa Station</strong>
+                                </div>
+                                <div class="travel-item">
+                                    <span>Parking</span>
+                                    <strong>Free parking on site</strong>
+                                </div>
+                            </div>
+                            <div class="action-row">
+                                <a class="button button-primary" href="https://maps.google.com/?q=Lodge%20Kiyokawa%2C%20158%20Kiyokawamachi%20Utaeda%2C%20Bungoono%2C%20Oita%20879-6911%2C%20Japan" target="_blank" rel="noreferrer">Open Directions</a>
+                                <a class="button button-primary" href="https://lodge-kiyokawa.jp/" target="_blank" rel="noreferrer">Lodge Website</a>
+                            </div>
+                            <p class="food-note">Food can be purchased at Lodge Kiyokawa. There are also a few nearby restaurants and a Michi no Eki.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="contact" class="section-band surface-strong">
+                <div class="section-inner">
+                    <div class="section-header">
+                        <div>
+                            <h2 class="section-title">Reserve or send a question</h2>
+                            <p class="section-intro">Use the form for event questions. Use the lodge phone number for room availability or extra-night requests.</p>
+                        </div>
+                        <div class="section-side">English and Japanese are both fine.</div>
+                    </div>
+
+                    <div class="contact-grid">
+                        <div class="contact-copy">
+                            <div class="contact-list">
+                                <div>
+                                    <strong>Event</strong>
+                                    <p>No event fee, no KYC, just reserve so the weekend can be planned cleanly.</p>
+                                </div>
+                                <div>
+                                    <strong>Rooms</strong>
+                                    <p>Contact Lodge Kiyokawa directly at <a href="tel:+81974353601">0974-35-3601</a>.</p>
+                                </div>
+                                <div>
+                                    <strong>Sunday plan</strong>
+                                    <p>If you want the farm visit or the other optional activities, keep the full day open.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <form class="form-panel" name="contact" method="POST" data-netlify="true">
+                            <input type="hidden" name="form-name" value="contact">
+                            <input type="text" name="name" placeholder="Your Name / Nym" required>
+                            <input type="email" name="email" placeholder="Your Email" required>
+                            <textarea name="message" placeholder="Your Message (English or 日本語)"></textarea>
+                            <button class="button button-primary" type="submit">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <section id="archive" class="section-band surface archive-band">
+                <div class="section-inner">
+                    <button class="archive-toggle" type="button" data-archive-toggle aria-expanded="false" aria-controls="archive-content-en">
+                        <div>
+                            <strong>2025 Archive</strong>
+                            <span>Information from the inaugural Bush Bash Japan event.</span>
+                        </div>
+                    </button>
+                    <div class="archive-content" id="archive-content-en" data-archive-content>
+                        <div class="archive-grid">
+                            <div class="archive-column">
+                                <h4>Dates</h4>
+                                <p>12 - 13 April 2025</p>
+                                <h4>Saturday</h4>
+                                <ul>
+                                    <li>9:00 AM - 10:00 AM: Check-in &amp; Coffee</li>
+                                    <li>10:00 AM - 12:00 PM: Introduction &amp; Presentations</li>
+                                    <li>12:00 PM - 2:00 PM: Lunch &amp; Free Time</li>
+                                    <li>2:00 PM - 5:00 PM: Presentations &amp; Discussions</li>
+                                    <li>5:00 PM - Late: Sauna, Bonfire, Dinner, Drinks, and More</li>
                                 </ul>
-                                <p><span class="font-bold">Sunday, April 13:</span></p>
-                                <ul class="ml-6 list-disc space-y-1">
-                                    <li><span class="font-bold">7:30 AM - 9:00 AM:</span> Breakfast & Pack-up</li>
-                                    <li><span class="font-bold">10:00 AM:</span> Lodge Checkout</li>
-                                    <li><span class="font-bold">10:30 AM - 4:00 PM:</span> Optional Activities:
-                                        <ul class="ml-6 list-disc space-y-1">
-                                            <li>River Rafting</li>
-                                            <li>Bamboo Fishing</li>
-                                            <li>Bicycle Rental</li>
-                                        </ul>
-                                    </li>
+                            </div>
+                            <div class="archive-column">
+                                <h4>Sunday</h4>
+                                <ul>
+                                    <li>7:30 AM - 10:00 AM: Breakfast &amp; Pack-up</li>
+                                    <li>10:00 AM: Lodge Checkout</li>
+                                    <li>10:30 AM - 4:00 PM: Optional Activities</li>
+                                    <li>River Rafting</li>
+                                    <li>Bamboo Fishing</li>
+                                    <li>Bicycle Rental</li>
+                                    <li>Farm Visit (10:30 AM - 12:00 PM)</li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </main>
 
-        <!-- Footer -->
         <footer>
             <p>© 2026 Bush Bash Japan. All rights reserved.</p>
         </footer>
     </div>
 
-    <!-- Back to Top Button -->
-    <button class="back-to-top" id="back-to-top" aria-label="Back to top">↑</button>
-
-    <!-- Japanese Content -->
-    <div id="content-jp" class="hidden jp">
-        <!-- Navigation Bar -->
-        <nav class="nav-bar py-4 px-6">
-            <div class="max-w-4xl mx-auto flex justify-between items-center">
-                <h1 class="text-xl font-bold text-gray-800">ブッシュバッシュジャパン</h1>
-                <div class="hamburger md:hidden">☰</div>
-                <div class="nav-menu md:flex md:space-x-6 items-center">
-                    <a href="#intro" class="text-gray-600 hover:text-orange-600">イントロ</a>
-                    <a href="#schedule" class="text-gray-600 hover:text-orange-600">スケジュール</a>
-                    <a href="#availability" class="text-gray-600 hover:text-orange-600">空き状況</a>
-                    <a href="#location" class="text-gray-600 hover:text-orange-600">場所</a>
-                    <a href="#contact" class="text-gray-600 hover:text-orange-600">お問い合わせ</a>
-                    <a href="#archive" class="text-gray-600 hover:text-orange-600">2025</a>
-                    <button id="toggle-en-jp" class="text-gray-600 hover:text-orange-600">English</button>
-                    <button id="toggle-jp-jp" class="text-gray-600 hover:text-orange-600 hidden md:inline">日本語</button>
+    <div id="content-jp" class="site hidden jp" lang="ja">
+        <nav class="nav-bar">
+            <div class="nav-inner">
+                <a class="brand" href="#top-jp">ブッシュバッシュジャパン</a>
+                <div class="nav-controls">
+                    <button class="menu-button" type="button" data-menu-toggle aria-label="ナビゲーションを開く">メニュー</button>
+                    <div class="nav-links" data-nav-links>
+                        <a href="#intro-jp">概要</a>
+                        <a href="#schedule-jp">スケジュール</a>
+                        <a href="#availability-jp">宿泊</a>
+                        <a href="#location-jp">場所</a>
+                        <a href="#contact-jp">お問い合わせ</a>
+                        <a href="#archive-jp">2025</a>
+                        <div class="lang-switch">
+                            <button class="lang-button" type="button" data-lang-target="en">English</button>
+                            <button class="lang-button is-active" type="button" data-lang-target="jp">日本語</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </nav>
 
-        <!-- Hero Section -->
-        <div class="hero">
-            <div class="hero-content">
-                <h1 class="text-6xl md:text-4xl font-bold">ブッシュバッシュジャパン</h1>
-                <p class="text-2xl md:text-lg mt-3">2026年4月18日 - 19日</p>
+        <section class="hero" id="top-jp">
+            <div class="hero-inner">
+                <p class="hero-kicker">2026年4月18日 - 19日 • ロッジ清川 • 大分県豊後大野市</p>
+                <h1>ブッシュバッシュジャパン</h1>
+                <p class="hero-copy">プレゼンテーション、ゆっくりした食事、夜のサウナ、そして日曜のオプションアクティビティまで続く、田舎でのビットコイン週末です。</p>
                 <div id="countdown-jp" class="countdown"></div>
-                <a href="#contact" class="cta-button mt-6 inline-block">今すぐ予約</a>
+                <div class="hero-facts">
+                    <div class="fact-chip">
+                        <span>土曜日</span>
+                        <strong>午前10時からプレゼン開始</strong>
+                    </div>
+                    <div class="fact-chip">
+                        <span>日曜日</span>
+                        <strong>午後4時までオプション企画</strong>
+                    </div>
+                    <div class="fact-chip">
+                        <span>宿泊</span>
+                        <strong>空き状況はロッジへ直接確認</strong>
+                    </div>
+                    <div class="fact-chip">
+                        <span>ナビ</span>
+                        <strong>マップコード 237-167-204*62</strong>
+                    </div>
+                </div>
+                <div class="hero-actions">
+                    <a class="button button-primary" href="#contact-jp">予約する</a>
+                    <a class="button button-secondary" href="https://maps.google.com/?q=Lodge%20Kiyokawa%2C%20158%20Kiyokawamachi%20Utaeda%2C%20Bungoono%2C%20Oita%20879-6911%2C%20Japan" target="_blank" rel="noreferrer">地図を開く</a>
+                    <a class="button button-secondary" href="tel:+81974353601">ロッジに電話</a>
+                </div>
             </div>
-        </div>
+        </section>
 
-        <div class="max-w-4xl mx-auto py-16 px-6">
-            <!-- Intro Section -->
-            <section id="intro" class="section-card intro-card">
-                <h2 class="text-3xl font-semibold mb-4">ブッシュバッシュジャパン 🇯🇵</h2>
-                <p>ブッシュバッシュオーストラリアに触発された2回目のブッシュバッシュジャパンにご参加ください。この非公式な週末は、日本の田舎でビットコイナーたちを集めます—イベント費用なし、KYCなし、素晴らしい議論と体験だけです。参加者が確定するにつれて、スケジュールとアクティビティが更新されます。</p>
-            </section>
+        <main class="page-shell">
+            <section id="intro-jp" class="section-band surface">
+                <div class="section-inner">
+                    <div class="section-header">
+                        <div>
+                            <h2 class="section-title">週末の全体像</h2>
+                            <p class="section-intro">ブッシュバッシュジャパンは、チケット販売や堅い進行のない集まりです。実務的な流れはシンプルで、土曜朝に到着し、ロッジ清川で落ち着き、夜まで過ごし、日曜の企画まで参加するなら一日を空けておく形です。</p>
+                        </div>
+                        <div class="section-side">現在の予定は、移動や宿の手配を進められる程度には固まっています。部屋の空き状況や追加宿泊はロッジへ直接ご確認ください。</div>
+                    </div>
 
-            <!-- Event Schedule -->
-            <section id="schedule" class="section-card">
-                <h2 class="text-3xl font-semibold mb-4">📅 イベントスケジュール</h2>
-                <div class="space-y-4">
-                    <div class="schedule-day">
-                        <p class="flex items-center gap-2"><span class="text-2xl">🌙</span><span class="font-bold">4月17日(金):</span> インフォーマルなミート＆グリート (夕方)</p>
-                    </div>
-                    <div class="schedule-day">
-                        <p class="flex items-center gap-2 mb-3"><span class="text-2xl">☀️</span><span class="font-bold">4月18日(土):</span> メインイベント日</p>
-                        <ul class="ml-8 space-y-2 text-gray-700">
-                            <li class="flex items-center gap-2"><span>☕</span><span class="font-semibold">午前9:00 - 10:00:</span> チェックイン＆コーヒー</li>
-                            <li class="flex items-center gap-2"><span>👋</span><span class="font-semibold">午前10:00 - 正午:</span> ウェルカム＆自己紹介</li>
-                            <li class="flex items-center gap-2"><span>🍱</span><span class="font-semibold">正午 - 午後2:00:</span> ランチ＆自由時間</li>
-                            <li class="flex items-center gap-2"><span>🎤</span><span class="font-semibold">午後2:00 - 4:00:</span> プレゼンテーション＆ディスカッション</li>
-                            <li class="flex items-center gap-2"><span>🌾</span><span class="font-semibold">午後4:00 - 6:00:</span> ファームビジット <span class="highlight-badge">New!</span></li>
-                            <li class="flex items-center gap-2"><span>🔥</span><span class="font-semibold">午後6:00 - 深夜:</span> サウナ、焚き火、ディナー、ドリンクなど</li>
-                        </ul>
-                    </div>
-                    <div class="schedule-day">
-                        <p class="flex items-center gap-2 mb-3"><span class="text-2xl">🌅</span><span class="font-bold">4月19日(日):</span></p>
-                        <ul class="ml-8 space-y-2 text-gray-700">
-                            <li class="flex items-center gap-2"><span>🍳</span><span class="font-semibold">午前7:30 - 9:00:</span> 朝食＆荷造り</li>
-                            <li class="flex items-center gap-2"><span>🏠</span><span class="font-semibold">午前10:00:</span> ロッジのチェックアウト</li>
-                            <li class="flex items-center gap-2"><span>🎯</span><span class="font-semibold">午前10:30 - 午後4:00:</span> オプションのアクティビティ</li>
-                        </ul>
-                        <div class="ml-12 mt-2 flex flex-wrap gap-3">
-                            <span class="inline-flex items-center gap-1 bg-orange-50 text-orange-700 px-3 py-1 rounded-full text-sm">🚣 川下り</span>
-                            <span class="inline-flex items-center gap-1 bg-orange-50 text-orange-700 px-3 py-1 rounded-full text-sm">🎣 竹釣り</span>
-                            <span class="inline-flex items-center gap-1 bg-orange-50 text-orange-700 px-3 py-1 rounded-full text-sm">🚲 自転車レンタル</span>
+                    <div class="overview-grid">
+                        <div class="overview-copy">
+                            <div class="overview-points">
+                                <div class="point">
+                                    <strong>参加費なし</strong>
+                                    <p>話を聞き、自然の中で過ごし、人と会うための週末です。</p>
+                                </div>
+                                <div class="point">
+                                    <strong>土曜が本編</strong>
+                                    <p>プレゼンとディスカッションは午前10時から午後5時までです。</p>
+                                </div>
+                                <div class="point">
+                                    <strong>日曜も使える日</strong>
+                                    <p>チェックアウトは午前10時、その後は午後4時までオプション企画があります。</p>
+                                </div>
+                                <div class="point">
+                                    <strong>新しいファームビジット</strong>
+                                    <p>日曜の企画に午前10時30分から正午までのファームビジットを追加しました。</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="availability-jp" class="detail-stack">
+                            <div class="detail-row">
+                                <div>
+                                    <div class="detail-label">空き状況</div>
+                                    <div class="detail-value">ロッジ清川へ直接お問い合わせください</div>
+                                </div>
+                            </div>
+                            <div class="detail-row">
+                                <div>
+                                    <div class="detail-label">電話</div>
+                                    <div class="detail-value"><a href="tel:+81974353601">0974-35-3601</a></div>
+                                </div>
+                            </div>
+                            <div class="detail-row">
+                                <div>
+                                    <div class="detail-label">追加宿泊</div>
+                                    <div class="detail-value">金曜と日曜の宿泊もロッジへ直接確認してください</div>
+                                </div>
+                            </div>
+                            <div class="action-row">
+                                <a class="button button-primary" href="tel:+81974353601">ロッジに電話</a>
+                                <a class="button button-primary" href="https://lodge-kiyokawa.jp/" target="_blank" rel="noreferrer">ロッジ公式サイト</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
-            
-            <!-- Current Availability -->
-            <section id="availability" class="section-card">
-                <h2 class="text-3xl font-semibold mb-4">🛏️ 現在の空き状況</h2>
-                <p><a href="https://lodge-kiyokawa.jp/" target="_blank" class="font-bold text-orange-600 hover:underline">ロッジ清川</a>での土曜日の夜の空き状況</p>
-                <div class="feature-grid">
-                    <div class="feature-item">
-                        <span class="feature-icon">🏡</span>
-                        <span class="feature-text">6つのツリーハウス</span>
-                        <span class="text-xs text-gray-500 mt-1">各最大2名</span>
-                    </div>
-                    <div class="feature-item">
-                        <span class="feature-icon">🛏️</span>
-                        <span class="feature-text">男性ドミトリー8名</span>
-                        <span class="text-xs text-gray-500 mt-1">ドミトリースポット</span>
-                    </div>
-                    <div class="feature-item">
-                        <span class="feature-icon">🛏️</span>
-                        <span class="feature-text">女性ドミトリー8名</span>
-                        <span class="text-xs text-gray-500 mt-1">ドミトリースポット</span>
-                    </div>
-                </div>
-                <div class="info-banner">
-                    <span class="info-banner-icon">💡</span>
-                    <p class="text-sm text-amber-800">金曜日または日曜日の空き状況については、以下の連絡フォームでお問い合わせください。</p>
-                </div>
-            </section>
-            
-            <!-- Location -->
-            <section id="location" class="section-card">
-                <h2 class="text-3xl font-semibold mb-4">📍 場所</h2>
-                <p>ブッシュバッシュジャパンは、大分県豊後大野市の<a href="https://lodge-kiyokawa.jp/" target="_blank" class="font-bold text-orange-600 hover:underline">ロッジ清川</a>で開催されます。</p>
-                <div class="venue-highlights">
-                    <span class="venue-tag">🌲 自然の中</span>
-                    <span class="venue-tag">🧖 サウナ</span>
-                    <span class="venue-tag">🔥 焚き火エリア</span>
-                    <span class="venue-tag">🏔️ 山の景色</span>
-                    <span class="venue-tag">🚗 無料駐車場</span>
-                </div>
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3355.996760732131!2d131.57039321520954!3d32.86736398101367!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3546b7e7c7e7c7e7%3A0x8e8f8c8e8f8c8e8f!2s158%20Kiyokawamachi%20Utaeda%2C%20Bungoono%2C%20Oita%20879-6911%2C%20Japan!5e0!3m2!1sen!2sjp!4v1677654321987!5m2!1sen!2sjp" width="100%" height="300" style="border:0; margin-top: 16px; border-radius: 12px;" allowfullscreen loading="lazy"></iframe>
-            </section>
-            
-            <!-- Food Availability -->
-            <section class="section-card">
-                <h2 class="text-3xl font-semibold mb-4">🍽️ 食事の提供</h2>
-                <p>ロッジ清川で食事が購入可能です。近くにはいくつかのレストランや道の駅もあります。</p>
-            </section>
 
-            <!-- Contact Form -->
-            <section id="contact" class="section-card">
-                <h2 class="text-3xl font-semibold mb-4">予約 / お問い合わせ</h2>
-                <form name="contact" method="POST" data-netlify="true" class="mt-6 space-y-4">
-                    <input type="hidden" name="form-name" value="contact">
-                    <input type="text" name="name" placeholder="お名前 / ニックネーム" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent" required>
-                    <input type="email" name="email" placeholder="メールアドレス" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent" required>
-                    <textarea name="message" placeholder="メッセージ (English or 日本語)" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent h-32"></textarea>
-                    <button type="submit" class="submit-button">メッセージを送信</button>
-                </form>
-            </section>
-        </div>
-
-        <!-- 2025 Archive Section -->
-        <section id="archive" class="max-w-4xl mx-auto py-16 px-6">
-            <div class="section-card archive-card" style="background: #f9fafb;">
-                <div class="archive-header collapsed" id="archive-header-jp">
-                    <h2 class="text-3xl font-semibold text-gray-600">📚 2025アーカイブ</h2>
-                </div>
-                <div class="archive-content collapsed" id="archive-content-jp">
-                    <p class="text-gray-600 mb-6 mt-4">初回ブッシュバッシュジャパンイベントの情報。</p>
-                    
-                    <div class="space-y-6">
+            <section id="schedule-jp" class="section-band surface-strong">
+                <div class="section-inner">
+                    <div class="section-header">
                         <div>
-                            <h3 class="text-xl font-semibold mb-2">イベント日程</h3>
-                            <p class="text-gray-700">2025年4月12日 - 13日</p>
+                            <h2 class="section-title">スケジュール</h2>
+                            <p class="section-intro">土曜日がメインプログラムです。日曜日は朝食、チェックアウト、その後に参加したい人向けのオプション企画という流れです。</p>
                         </div>
-                        
+                        <div class="section-side">日曜のオプション枠には、既存の3つの企画に加えてファームビジットを入れています。</div>
+                    </div>
+
+                    <div class="timeline-layout">
+                        <div class="day-block">
+                            <div class="day-head">
+                                <div>
+                                    <h3>4月17日(金)</h3>
+                                    <p>到着日</p>
+                                </div>
+                                <div class="section-side">夕方</div>
+                            </div>
+                            <div class="timeline">
+                                <div class="timeline-entry">
+                                    <div class="timeline-time">夕方</div>
+                                    <div class="timeline-copy">
+                                        <strong>インフォーマルなミート＆グリート</strong>
+                                        <p>本編前にゆるく集まる時間です。</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="day-block">
+                            <div class="day-head">
+                                <div>
+                                    <h3>4月18日(土)</h3>
+                                    <p>メインイベント日</p>
+                                </div>
+                                <div class="section-side">トーク、昼休み、夜の時間</div>
+                            </div>
+                            <div class="timeline">
+                                <div class="timeline-entry">
+                                    <div class="timeline-time">午前9:00 - 10:00</div>
+                                    <div class="timeline-copy">
+                                        <strong>チェックイン＆コーヒー</strong>
+                                        <p>最初のセッション前に落ち着いて合流します。</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-entry">
+                                    <div class="timeline-time">午前10:00 - 正午</div>
+                                    <div class="timeline-copy">
+                                        <strong>紹介＆プレゼンテーション</strong>
+                                        <p>自己紹介と最初のプレゼンブロックです。</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-entry">
+                                    <div class="timeline-time">正午 - 午後2:00</div>
+                                    <div class="timeline-copy">
+                                        <strong>ランチ＆自由時間</strong>
+                                        <p>午後のディスカッション前に長めの休憩を取ります。</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-entry">
+                                    <div class="timeline-time">午後2:00 - 5:00</div>
+                                    <div class="timeline-copy">
+                                        <strong>プレゼンテーション＆ディスカッション</strong>
+                                        <p>午後後半のメインブロックです。</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-entry">
+                                    <div class="timeline-time">午後5:00 - 深夜</div>
+                                    <div class="timeline-copy">
+                                        <strong>サウナ、焚き火、ディナー、ドリンクなど</strong>
+                                        <p>トーク終了後は自由度の高い時間に切り替わります。</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="day-block">
+                            <div class="day-head">
+                                <div>
+                                    <h3>4月19日(日)</h3>
+                                    <p>朝食、チェックアウト、オプション企画</p>
+                                </div>
+                                <div class="section-side">日曜を使い切るなら一日を空けておく形です</div>
+                            </div>
+                            <div class="timeline">
+                                <div class="timeline-entry">
+                                    <div class="timeline-time">午前7:30 - 10:00</div>
+                                    <div class="timeline-copy">
+                                        <strong>朝食＆荷造り</strong>
+                                        <p>チェックアウト前はゆっくりめの朝です。</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-entry">
+                                    <div class="timeline-time">午前10:00</div>
+                                    <div class="timeline-copy">
+                                        <strong>ロッジのチェックアウト</strong>
+                                        <p>部屋のチェックアウト後に日曜企画へ移ります。</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-entry">
+                                    <div class="timeline-time">午前10:30 - 午後4:00</div>
+                                    <div class="timeline-copy">
+                                        <strong>オプションのアクティビティ</strong>
+                                        <p>既存の3つの企画はそのまま残し、ファームビジットを追加しています。</p>
+                                        <div class="tag-row">
+                                            <span class="tag">🚣 川下り</span>
+                                            <span class="tag">🎣 竹釣り</span>
+                                            <span class="tag">🚲 自転車レンタル</span>
+                                            <span class="tag featured">🌾 ファームビジット • 午前10:30 - 正午</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="location-jp" class="section-band surface">
+                <div class="section-inner">
+                    <div class="section-header">
                         <div>
-                            <h3 class="text-xl font-semibold mb-2">イベントスケジュール</h3>
-                            <div class="space-y-2 text-gray-700">
-                                <p><span class="font-bold">4月11日(金):</span> インフォーマルなミート＆グリート (夕方)</p>
-                                <p><span class="font-bold">4月12日(土):</span> メインイベント日</p>
-                                <ul class="ml-6 list-disc space-y-1">
-                                    <li><span class="font-bold">午前9:00 - 10:00:</span> チェックイン＆コーヒー</li>
-                                    <li><span class="font-bold">午前10:00 - 正午:</span> 紹介＆プレゼンテーション</li>
-                                    <li><span class="font-bold">正午 - 午後2:00:</span> ランチ＆自由時間</li>
-                                    <li><span class="font-bold">午後2:00 - 5:00:</span> プレゼンテーション＆ディスカッション</li>
-                                    <li><span class="font-bold">午後5:00 - 深夜:</span> サウナ、焚き火、ディナー、ドリンクなど</li>
+                            <h2 class="section-title">移動とロッジ情報</h2>
+                            <p class="section-intro">車で来る場合は、地図リンクか公式マップコードの利用がおすすめです。ロッジ公式でも、住所や電話番号検索だと違う場所へ案内される場合があると案内しています。</p>
+                        </div>
+                        <div class="section-side">会場は大分県豊後大野市清川町宇田枝のロッジ清川です。</div>
+                    </div>
+
+                    <div class="travel-grid">
+                        <div class="map-frame">
+                            <iframe src="https://maps.google.com/maps?q=Lodge%20Kiyokawa%2C%20158%20Kiyokawamachi%20Utaeda%2C%20Bungoono%2C%20Oita%20879-6911%2C%20Japan&amp;z=16&amp;output=embed" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+
+                        <div class="detail-stack">
+                            <div class="travel-list">
+                                <div class="travel-item">
+                                    <span>住所</span>
+                                    <strong>〒879-6911 大分県豊後大野市清川町宇田枝158</strong>
+                                </div>
+                                <div class="travel-item">
+                                    <span>電話</span>
+                                    <strong><a href="tel:+81974353601">0974-35-3601</a></strong>
+                                </div>
+                                <div class="travel-item">
+                                    <span>マップコード</span>
+                                    <strong>237-167-204*62</strong>
+                                </div>
+                                <div class="travel-item">
+                                    <span>大分方面から</span>
+                                    <strong>大分米良ICから約50分</strong>
+                                </div>
+                                <div class="travel-item">
+                                    <span>鉄道</span>
+                                    <strong>豊後清川駅から2.3km</strong>
+                                </div>
+                                <div class="travel-item">
+                                    <span>駐車場</span>
+                                    <strong>無料駐車場あり</strong>
+                                </div>
+                            </div>
+                            <div class="action-row">
+                                <a class="button button-primary" href="https://maps.google.com/?q=Lodge%20Kiyokawa%2C%20158%20Kiyokawamachi%20Utaeda%2C%20Bungoono%2C%20Oita%20879-6911%2C%20Japan" target="_blank" rel="noreferrer">ルートを開く</a>
+                                <a class="button button-primary" href="https://lodge-kiyokawa.jp/" target="_blank" rel="noreferrer">ロッジ公式サイト</a>
+                            </div>
+                            <p class="food-note">食事はロッジ清川で購入できます。近くにはレストランや道の駅もあります。</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="contact-jp" class="section-band surface-strong">
+                <div class="section-inner">
+                    <div class="section-header">
+                        <div>
+                            <h2 class="section-title">予約とお問い合わせ</h2>
+                            <p class="section-intro">イベントに関する質問はこのフォームからどうぞ。宿の空き状況や追加宿泊はロッジへ直接ご連絡ください。</p>
+                        </div>
+                        <div class="section-side">English でも日本語でも大丈夫です。</div>
+                    </div>
+
+                    <div class="contact-grid">
+                        <div class="contact-copy">
+                            <div class="contact-list">
+                                <div>
+                                    <strong>イベントについて</strong>
+                                    <p>参加費もKYCもありません。人数感を掴むために連絡だけお願いします。</p>
+                                </div>
+                                <div>
+                                    <strong>宿泊について</strong>
+                                    <p>空き状況は <a href="tel:+81974353601">0974-35-3601</a> に直接お問い合わせください。</p>
+                                </div>
+                                <div>
+                                    <strong>日曜の予定</strong>
+                                    <p>ファームビジットや他のオプション企画に参加するなら、日曜を一日空けておく前提がよさそうです。</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <form class="form-panel" name="contact" method="POST" data-netlify="true">
+                            <input type="hidden" name="form-name" value="contact">
+                            <input type="text" name="name" placeholder="お名前 / ニックネーム" required>
+                            <input type="email" name="email" placeholder="メールアドレス" required>
+                            <textarea name="message" placeholder="メッセージ (English or 日本語)"></textarea>
+                            <button class="button button-primary" type="submit">送信する</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <section id="archive-jp" class="section-band surface archive-band">
+                <div class="section-inner">
+                    <button class="archive-toggle" type="button" data-archive-toggle aria-expanded="false" aria-controls="archive-content-jp">
+                        <div>
+                            <strong>2025アーカイブ</strong>
+                            <span>初回ブッシュバッシュジャパンの情報です。</span>
+                        </div>
+                    </button>
+                    <div class="archive-content" id="archive-content-jp" data-archive-content>
+                        <div class="archive-grid">
+                            <div class="archive-column">
+                                <h4>日程</h4>
+                                <p>2025年4月12日 - 13日</p>
+                                <h4>土曜日</h4>
+                                <ul>
+                                    <li>午前9:00 - 10:00: チェックイン＆コーヒー</li>
+                                    <li>午前10:00 - 正午: 紹介＆プレゼンテーション</li>
+                                    <li>正午 - 午後2:00: ランチ＆自由時間</li>
+                                    <li>午後2:00 - 5:00: プレゼンテーション＆ディスカッション</li>
+                                    <li>午後5:00 - 深夜: サウナ、焚き火、ディナー、ドリンクなど</li>
                                 </ul>
-                                <p><span class="font-bold">4月13日(日):</span></p>
-                                <ul class="ml-6 list-disc space-y-1">
-                                    <li><span class="font-bold">午前7:30 - 9:00:</span> 朝食＆荷造り</li>
-                                    <li><span class="font-bold">午前10:00:</span> ロッジのチェックアウト</li>
-                                    <li><span class="font-bold">午前10:30 - 午後4:00:</span> オプションのアクティビティ：
-                                        <ul class="ml-6 list-disc space-y-1">
-                                            <li>川下り</li>
-                                            <li>竹釣り</li>
-                                            <li>自転車レンタル</li>
-                                        </ul>
-                                    </li>
+                            </div>
+                            <div class="archive-column">
+                                <h4>日曜日</h4>
+                                <ul>
+                                    <li>午前7:30 - 10:00: 朝食＆荷造り</li>
+                                    <li>午前10:00: ロッジのチェックアウト</li>
+                                    <li>午前10:30 - 午後4:00: オプションのアクティビティ</li>
+                                    <li>川下り</li>
+                                    <li>竹釣り</li>
+                                    <li>自転車レンタル</li>
+                                    <li>ファームビジット (午前10:30 - 正午)</li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </main>
 
-        <!-- Footer -->
         <footer>
-            <p>© 2026 ブッシュバッシュジャパン。全権利予約。</p>
+            <p>© 2026 ブッシュバッシュジャパン。無断転載を禁じます。</p>
         </footer>
     </div>
 
-    <!-- JavaScript for Language Toggle, Hamburger Menu, and Countdown -->
+    <button class="back-to-top" id="back-to-top" aria-label="Back to top">↑</button>
+
     <script>
-        // Language Toggle
         const contentEn = document.getElementById("content-en");
         const contentJp = document.getElementById("content-jp");
-        const toggleEn = document.getElementById("toggle-en");
-        const toggleJp = document.getElementById("toggle-jp");
-        const toggleEnJp = document.getElementById("toggle-en-jp");
-        const toggleJpJp = document.getElementById("toggle-jp-jp");
+        const langButtons = document.querySelectorAll("[data-lang-target]");
+        const menuButtons = document.querySelectorAll("[data-menu-toggle]");
+        const navContainers = document.querySelectorAll("[data-nav-links]");
+        const archiveToggles = document.querySelectorAll("[data-archive-toggle]");
+        const backToTopButton = document.getElementById("back-to-top");
 
-        toggleEn.addEventListener("click", () => {
-            contentEn.classList.remove("hidden");
-            contentJp.classList.add("hidden");
-        });
-        toggleJp.addEventListener("click", () => {
-            contentEn.classList.add("hidden");
-            contentJp.classList.remove("hidden");
-        });
-        toggleEnJp.addEventListener("click", () => {
-            contentEn.classList.remove("hidden");
-            contentJp.classList.add("hidden");
-        });
-        toggleJpJp.addEventListener("click", () => {
-            contentEn.classList.add("hidden");
-            contentJp.classList.remove("hidden");
+        function showLanguage(lang) {
+            const showEnglish = lang !== "jp";
+            contentEn.classList.toggle("hidden", !showEnglish);
+            contentJp.classList.toggle("hidden", showEnglish);
+
+            langButtons.forEach((button) => {
+                button.classList.toggle("is-active", button.dataset.langTarget === lang);
+            });
+
+            navContainers.forEach((menu) => menu.classList.remove("is-open"));
+            menuButtons.forEach((button) => button.setAttribute("aria-expanded", "false"));
+
+            try {
+                window.localStorage.setItem("bbj-language", lang);
+            } catch (error) {
+                // Ignore storage failures when the page is opened in a restricted context.
+            }
+        }
+
+        langButtons.forEach((button) => {
+            button.addEventListener("click", () => showLanguage(button.dataset.langTarget));
         });
 
-        // Hamburger Menu
-        const hamburger = document.querySelectorAll(".hamburger");
-        const navMenus = document.querySelectorAll(".nav-menu");
+        let preferredLanguage = "en";
+        try {
+            preferredLanguage = window.localStorage.getItem("bbj-language") || "en";
+        } catch (error) {
+            preferredLanguage = "en";
+        }
+        showLanguage(preferredLanguage);
 
-        hamburger.forEach((btn, index) => {
-            btn.addEventListener("click", () => {
-                btn.classList.toggle("active");
-                navMenus[index].classList.toggle("active");
+        menuButtons.forEach((button, index) => {
+            button.setAttribute("aria-expanded", "false");
+            button.addEventListener("click", () => {
+                const menu = navContainers[index];
+                const isOpen = menu.classList.toggle("is-open");
+                button.setAttribute("aria-expanded", String(isOpen));
             });
         });
 
-        // Countdown
+        document.querySelectorAll("[data-nav-links] a, [data-nav-links] button").forEach((item) => {
+            item.addEventListener("click", () => {
+                navContainers.forEach((menu) => menu.classList.remove("is-open"));
+                menuButtons.forEach((button) => button.setAttribute("aria-expanded", "false"));
+            });
+        });
+
         function updateCountdown() {
-            const eventDate = new Date("2026-04-18T00:00:00+09:00"); // JST
+            const eventDate = new Date("2026-04-18T00:00:00+09:00");
             const now = new Date();
             const timeLeft = eventDate - now;
 
             if (timeLeft < 0) {
-                document.getElementById("countdown-en").innerHTML = "Bush Bash Japan has begun!";
-                document.getElementById("countdown-jp").innerHTML = "ブッシュバッシュジャパンが始まりました！";
+                document.getElementById("countdown-en").textContent = "Bush Bash Japan has begun!";
+                document.getElementById("countdown-jp").textContent = "ブッシュバッシュジャパンが始まりました。";
                 return;
             }
 
             const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-            document.getElementById("countdown-en").innerHTML = `${days} days until Bush Bash Japan`;
-            document.getElementById("countdown-jp").innerHTML = `ブッシュバッシュジャパンまで${days}日`;
+            const hours = Math.floor((timeLeft / (1000 * 60 * 60)) % 24);
+            document.getElementById("countdown-en").textContent = `${days} days and ${hours} hours to go`;
+            document.getElementById("countdown-jp").textContent = `あと${days}日と${hours}時間`;
         }
 
-        setInterval(updateCountdown, 1000);
-        updateCountdown(); // Initial call
+        updateCountdown();
+        setInterval(updateCountdown, 60 * 1000);
 
-        // Archive Section Collapse/Expand
-        const archiveHeaderEn = document.getElementById("archive-header-en");
-        const archiveContentEn = document.getElementById("archive-content-en");
-        const archiveHeaderJp = document.getElementById("archive-header-jp");
-        const archiveContentJp = document.getElementById("archive-content-jp");
-
-        if (archiveHeaderEn && archiveContentEn) {
-            archiveHeaderEn.addEventListener("click", () => {
-                archiveHeaderEn.classList.toggle("collapsed");
-                archiveContentEn.classList.toggle("collapsed");
+        archiveToggles.forEach((toggle) => {
+            const content = document.getElementById(toggle.getAttribute("aria-controls"));
+            toggle.addEventListener("click", () => {
+                const isOpen = toggle.getAttribute("aria-expanded") === "true";
+                toggle.setAttribute("aria-expanded", String(!isOpen));
+                content.classList.toggle("is-open", !isOpen);
             });
-        }
+        });
 
-        if (archiveHeaderJp && archiveContentJp) {
-            archiveHeaderJp.addEventListener("click", () => {
-                archiveHeaderJp.classList.toggle("collapsed");
-                archiveContentJp.classList.toggle("collapsed");
-            });
-        }
-
-        // Back to Top Button
-        const backToTopButton = document.getElementById("back-to-top");
-        
         function toggleBackToTop() {
-            if (window.pageYOffset > 300) {
+            if (window.scrollY > 300) {
                 backToTopButton.classList.add("visible");
             } else {
                 backToTopButton.classList.remove("visible");
@@ -792,25 +1605,10 @@
         }
 
         window.addEventListener("scroll", toggleBackToTop);
-        
-        if (backToTopButton) {
-            backToTopButton.addEventListener("click", () => {
-                window.scrollTo({
-                    top: 0,
-                    behavior: "smooth"
-                });
-            });
-        }
+        toggleBackToTop();
 
-        // Close mobile menu when clicking on a link
-        const navLinks = document.querySelectorAll(".nav-menu a");
-        navLinks.forEach(link => {
-            link.addEventListener("click", () => {
-                hamburger.forEach((btn, index) => {
-                    btn.classList.remove("active");
-                    navMenus[index].classList.remove("active");
-                });
-            });
+        backToTopButton.addEventListener("click", () => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
         });
     </script>
 </body>
