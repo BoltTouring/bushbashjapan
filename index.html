@@ -63,6 +63,17 @@
             display: none !important;
         }
 
+        .honeypot {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            margin: -1px;
+            padding: 0;
+            overflow: hidden;
+            clip: rect(0 0 0 0);
+            border: 0;
+        }
+
         .site {
             min-height: 100vh;
         }
@@ -1087,11 +1098,14 @@
                             </div>
                         </div>
 
-                        <form class="form-panel" name="contact" method="POST" data-netlify="true">
+                        <form class="form-panel" name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field">
                             <input type="hidden" name="form-name" value="contact">
+                            <p class="honeypot" aria-hidden="true">
+                                <label>Do not fill this out if you are human: <input type="text" name="bot-field" tabindex="-1" autocomplete="off"></label>
+                            </p>
                             <input type="text" name="name" placeholder="Your Name / Nym" required>
                             <input type="email" name="email" placeholder="Your Email" required>
-                            <textarea name="message" placeholder="Your Message (English or 日本語)"></textarea>
+                            <textarea name="message" placeholder="Your Message (English or 日本語)" required></textarea>
                             <button class="button button-primary" type="submit">Send Message</button>
                         </form>
                     </div>
@@ -1498,11 +1512,14 @@
                             </div>
                         </div>
 
-                        <form class="form-panel" name="contact" method="POST" data-netlify="true">
+                        <form class="form-panel" name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field">
                             <input type="hidden" name="form-name" value="contact">
+                            <p class="honeypot" aria-hidden="true">
+                                <label>人間の場合は入力しないでください: <input type="text" name="bot-field" tabindex="-1" autocomplete="off"></label>
+                            </p>
                             <input type="text" name="name" placeholder="お名前 / ニックネーム" required>
                             <input type="email" name="email" placeholder="メールアドレス" required>
-                            <textarea name="message" placeholder="メッセージ (English or 日本語)"></textarea>
+                            <textarea name="message" placeholder="メッセージ (English or 日本語)" required></textarea>
                             <button class="button button-primary" type="submit">送信する</button>
                         </form>
                     </div>
